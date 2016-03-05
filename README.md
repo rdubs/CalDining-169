@@ -1,6 +1,6 @@
 #CS 169, Team 6: Cal Dining App#
 
-3 badges for Code Climate
+##3 badges for Code Climate##
 
 [![Code Climate](https://codeclimate.com/github/veersuvrat/CalDining-169/badges/gpa.svg)](https://codeclimate.com/github/veersuvrat/CalDining-169)
 
@@ -8,7 +8,7 @@
 
 [![Issue Count](https://codeclimate.com/github/veersuvrat/CalDining-169/badges/issue_count.svg)](https://codeclimate.com/github/veersuvrat/CalDining-169)
 
-Travis.CI information - Build info
+##Travis.CI information - Build info##
 
 [![Build Status](https://travis-ci.org/veersuvrat/CalDining-169.svg?branch=master)](https://travis-ci.org/veersuvrat/CalDining-169)
 
