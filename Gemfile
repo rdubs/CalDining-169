@@ -35,8 +35,24 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  
+  gem 'cucumber', '2.0.0'
+  gem 'cucumber-sinatra', '0.5.0'
+  gem 'capybara', '2.4.4'
+
+  gem 'rspec', '3.3.0'
+  gem 'rspec-autotest', '1.0.0'
+
+  gem 'rack-test', '0.6.3'
+  gem 'rack_session_access', '0.1.1'
+
+  gem 'byebug', '5.0.0'
+  gem 'launchy', '2.4.3'
+  gem 'rerun', '0.10.0'
+
+  gem 'simplecov', '0.10.0'
+  gem 'webmock', '1.21.0'
+  gem 'ZenTest', '4.11.0'
 end
 
 group :development do
