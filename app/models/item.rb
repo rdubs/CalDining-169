@@ -1,3 +1,3 @@
 class Item < ActiveRecord::Base
-    has_and_belongs_to_many :menus
+    has_and_belongs_to_many :menus, :join_table => :items_menus
 end
