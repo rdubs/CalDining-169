@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
-
+# required for the parser
+gem 'nokogiri'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use postgres as the database for Active Record
