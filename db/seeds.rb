@@ -52,5 +52,29 @@ foothill_dinner.items.delete(Item.all)
 
 crossroads_breakfast.items << milk
 crossroads_breakfast.items << coffee
-foothill_dinner.items << pizza
+crossroads_lunch.items << pizza
+crossroads_lunch.items << milk
+crossroads_dinner.items << pizza
+crossroads_dinner.items << milk
+
+cafe_3_breakfast.items << milk
+cafe_3_breakfast.items << coffee
+cafe_3_lunch.items << pizza
+cafe_3_lunch.items << milk
+cafe_3_dinner.items << bread
+cafe_3_dinner.items << milk
+
+foothill_breakfast.items << milk
+foothill_breakfast.items << bread
+foothill_lunch.items << pizza
+foothill_lunch.items << coffee
 foothill_dinner.items << coffee
+foothill_dinner.items << milk
+
+clark_kerr_breakfast.items << milk
+clark_kerr_breakfast.items << coffee
+clark_kerr_lunch.items << pizza
+clark_kerr_lunch.items << coffee
+clark_kerr_dinner.items << bread
+clark_kerr_dinner.items << pizza
+

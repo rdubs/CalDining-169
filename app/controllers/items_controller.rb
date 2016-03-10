@@ -10,6 +10,11 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.json
   def show
+    @meal = params[:meal]
+    @location = params[:location]
+    @id = Menu.where(:meal => @meal, :location => @location).first.id
+    item = Item.where(:id => params[:id]).first
+    @other_locations = item.menus.where(:meal => @meal).reject {|menu|  menu.location == @location}
   end
 
   # GET /items/new

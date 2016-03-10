@@ -34,7 +34,8 @@ class MenusController < ApplicationController
   # GET /menus/1
   # GET /menus/1.json
   def show
-    menu = Menu.where(id: params[:id]).first
+    @menu = Menu.where(id: params[:id]).first
+    @items = @menu.items
     #we have access to meal
   end
 
