@@ -4,7 +4,11 @@ class MenusController < ApplicationController
   # GET /menus
   # GET /menus.json
   def index
+    @meals = Menu.meals
+    @locations = Menu.locations
     @menus = Menu.all
+    @selected_meal = 'Lunch/Brunch'
+    @selected_location = 'Crossroads'
   end
 
   # GET /menus/1
