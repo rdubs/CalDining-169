@@ -7,13 +7,35 @@ class MenusController < ApplicationController
     @meals = Menu.meals
     @locations = Menu.locations
     @menus = Menu.all
-    @selected_meal = 'Lunch/Brunch'
-    @selected_location = 'Crossroads'
+    
+    #@selected_meal = ""
+    @selected_location = ""
+
+    #session.clear
+    if params[:meal] && params[:location]
+      #session[:selected_meal] = params[:meal]
+      #session[:selected_location] = params[:location]
+      @selected_meal = params[:meal]
+      @selected_location = params[:location]
+    #elsif session[:selected_meal] && session[:selected_location]
+      #@selected_meal = session[:selected_meal]
+      #@selected_location = session[:selected_location]
+    end
+
+    if @selected_meal and @selected_location
+      menu = Menu.where(:meal => @selected_meal, :location => @selected_location).first
+      if not menu.nil?
+        id = menu.id
+        redirect_to menu_path(id) and return
+      end
+    end
   end
 
   # GET /menus/1
   # GET /menus/1.json
   def show
+    menu = Menu.where(id: params[:id]).first
+    #we have access to meal
   end
 
   # GET /menus/new

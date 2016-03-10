@@ -3,9 +3,9 @@
 = form_tag menus_path, :method => :get, id: "menus_form" do
   - @meals.each do |meal|
     = meal
-    = radio_button_tag "meal", 1, @selected_meal.include?(meal), :id => "#{meal}"
+    = radio_button_tag :meal, "#{meal}", 0, :id => "#{meal}"
   %br
   - @locations.each do |location|
     = location
-    = radio_button_tag "location", 1, @selected_location.include?(location), :id => "#{location}"
+    = radio_button_tag :location, "#{location}", 0, :id => "#{location}"
   = submit_tag 'Submit', id: "menus_submit"
