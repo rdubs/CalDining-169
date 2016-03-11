@@ -2,9 +2,9 @@ require 'rubygems'
 require 'open-uri'
 require 'nokogiri'
 
-base_url = "http://services.housing.berkeley.edu/FoodPro/dining/static/"
-menu_path = "todaysentrees.asp"
-DOC = Nokogiri::HTML(open(base_url + menu_path))
+@base_url = "http://services.housing.berkeley.edu/FoodPro/dining/static/"
+@menu_path = "todaysentrees.asp"
+DOC = Nokogiri::HTML(open(@base_url + @menu_path))
 
 #USE AND MODIFY only these variables for relative postioning of locations on the website.
 POSITIONS = {"Crossroads" => 0, "Cafe 3" => 1, "Foothill" => 2, "Clark Kerr" => 3}
@@ -49,45 +49,77 @@ def get_item_hashes(sub_menu)
     items = []
 
     sub_menu.css("a").each do |item|
-        item_url = base_url + item.attributes["href"].value
+        item_url = @base_url + item.attributes["href"].value
         item_doc = Nokogiri::HTML(open(item_url))
         item_hash = {}
 
         item_hash["Name"] = item.text
-        item_hash["Calories"] = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Calories/}.first.text.match(/^Calories.(\d*)/)[1]
-        item_hash["Calories from Fat"] = item_doc.css("font").select{|candidate| candidate.text =~ /Calories from/}.first.text.match(/Calories from Fat.(\d*)/)[1]
 
-        item_hash["Total Fat"] = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Total/}.first.next.text
-        item_hash["Total Fat Pct"] = (item_hash["Total Fat"][0..-2].to_f / 65 * 100).round.to_s
+        if item_doc.css("font").select{|candidate| candidate.css("i").text =~ /^Nutritional Information is not available/}.empty?
+            item_hash["Nutrition Available"] = true
+        else
+            item_hash["Nutrition Available"] = false
+            break
+        end
 
-        item_hash["Tot. Carb"] = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Tot\./}.first.next.text
-        item_hash["Tot. Carb Pct"] = (item_hash["Tot. Carb"][0..-2].to_f / 300 * 100).round.to_s
+        c_match = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Calories/}.first.text.match(/^Calories.(\d*)/)
+        item_hash["Calories"] = c_match[1] if c_match
 
-        item_hash["Sat. Fat"] = item_doc.css("font").select{|candidate| candidate.text =~ /Sat\./}.first.next.text
-        item_hash["Sat. Fat Pct"] = (item_hash["Sat. Fat"][0..-2].to_f / 20 * 100).round.to_s
+        cff_match = item_doc.css("font").select{|candidate| candidate.text =~ /Calories from/}.first.text.match(/Calories from Fat.(\d*)/)
+        item_hash["Calories from Fat"] = cff_match[1] if cff_match
 
-        item_hash["Dietary Fiber"] = item_doc.css("font").select{|candidate| candidate.text =~ /Dietary/}.first.next.text
-        item_hash["Dietary Fiber Pct"] = (item_hash["Dietary Fiber"][0..-2].to_f / 25 * 100).round.to_s
+        tf_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Total/}.first.next.text
+        item_hash["Total Fat"] = tf_text if tf_text
+        item_hash["Total Fat Pct"] = (item_hash["Total Fat"][0..-2].to_f / 65 * 100).round.to_s if tf_text
 
-        item_hash["Trans Fat"] = item_doc.css("font").select{|candidate| candidate.text =~ /Trans/}.first.next.text
+        tc_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Tot\./}.first.next.text
+        item_hash["Tot. Carb"] = tc_text if tc_text
+        item_hash["Tot. Carb Pct"] = (item_hash["Tot. Carb"][0..-2].to_f / 300 * 100).round.to_s if tc_text
 
-        item_hash["Sugars"] = item_doc.css("font").select{|candidate| candidate.text =~ /Sugars/}.first.next.text
+        sf_text = item_doc.css("font").select{|candidate| candidate.text =~ /Sat\./}.first.next.text
+        item_hash["Sat. Fat"] = sf_text if sf_text
+        item_hash["Sat. Fat Pct"] = (item_hash["Sat. Fat"][0..-2].to_f / 20 * 100).round.to_s if sf_text
 
-        item_hash["Cholesterol"] = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Cholesterol/}.first.next.text
-        item_hash["Cholesterol Pct"] = (item_hash["Cholesterol"][0..-3].to_f / 300 * 100).round.to_s
+        df_text = item_doc.css("font").select{|candidate| candidate.text =~ /Dietary/}.first.next.text
+        item_hash["Dietary Fiber"] = df_text if df_text
+        item_hash["Dietary Fiber Pct"] = (item_hash["Dietary Fiber"][0..-2].to_f / 25 * 100).round.to_s if df_text
 
-        item_hash["Protein"] = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Protein/}.first.next.text
+        trf_text = item_doc.css("font").select{|candidate| candidate.text =~ /Trans/}.first.next.text
+        item_hash["Trans Fat"] = trf_text if trf_text
 
-        item_hash["Sodium"] = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Sodium/}.first.next.text
-        item_hash["Sodium Pct"] = (item_hash["Sodium"][0..-3].to_f / 2400 * 100).round.to_s
+        su_text = item_doc.css("font").select{|candidate| candidate.text =~ /Sugars/}.first.next.text
+        item_hash["Sugars"] = su_text if su_text
 
-        #All are percentages
-        item_hash["Vitamin C"] = item_doc.css("font").select{|candidate| candidate.text =~ /Vitamin C/}.first.next.next.text.match(/(\d*)%\z/)[1]
-        item_hash["Calcium"] = item_doc.css("font").select{|candidate| candidate.text =~ /Calcium/}.first.next.next.text.match(/(\d*)%\z/)[1]
-        item_hash["Iron"] = item_doc.css("font").select{|candidate| candidate.text =~ /Iron/}.first.next.next.text.match(/(\d*)%\z/)[1]
+        ch_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Cholesterol/}.first.next.text
+        item_hash["Cholesterol"] = ch_text if ch_text
+        item_hash["Cholesterol Pct"] = (item_hash["Cholesterol"][0..-3].to_f / 300 * 100).round.to_s if ch_text
 
-        item_hash["Allergens"] = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^ALLERGENS/}.first.text.gsub("\u00A0", " ").match(/ALLERGENS:\s+(.*)/)[1]
-        item_hash["Ingredients"] = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^INGREDIENTS/}.first.text.gsub("\u00A0", " ").match(/INGREDIENTS:\s+(.*)/)[1]
+        p_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Protein/}.first.next.text
+        item_hash["Protein"] = p_text if p_text
+
+        sd_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Sodium/}.first.next.text
+        item_hash["Sodium"] = sd_text if sd_text
+        item_hash["Sodium Pct"] = (item_hash["Sodium"][0..-3].to_f / 2400 * 100).round.to_s if sd_text
+
+        # Percentage
+        vc_match = item_doc.css("font").select{|candidate| candidate.text =~ /Vitamin C/}.first.next.next.text.match(/(\d*)%\z/)
+        item_hash["Vitamin C"] = vc_match[1] if vc_match
+
+        # Percentage
+        ca_match = item_doc.css("font").select{|candidate| candidate.text =~ /Calcium/}.first.next.next.text.match(/(\d*)%\z/)
+        item_hash["Calcium"] = ca_match[1] if ca_match
+
+        # Percentage
+        fe_match = item_doc.css("font").select{|candidate| candidate.text =~ /Iron/}.first.next.next.text.match(/(\d*)%\z/)
+        item_hash["Iron"] = fe_match[1] if fe_match
+
+        # Form: single string (looks like list)
+        al_match = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^ALLERGENS/}.first.text.gsub("\u00A0", " ").match(/ALLERGENS:\s+(.*)/)
+        item_hash["Allergens"] = al_match[1] if al_match
+
+        # Form: single string (looks like list)
+        i_match = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^INGREDIENTS/}.first.text.gsub("\u00A0", " ").match(/INGREDIENTS:\s+(.*)/)
+        item_hash["Ingredients"] = i_match[1] if i_match
 
         items << item_hash
     end
