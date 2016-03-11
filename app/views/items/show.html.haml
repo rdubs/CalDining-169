@@ -1,0 +1,7 @@
+
+%h1 #{@item.name} 
+%p Available at #{@location} for #{@meal}
+%p Also available for #{@meal} at:
+- @other_locations.each do |location|
+  %p #{location.location}
+= link_to 'Back', menu_path(@id)
