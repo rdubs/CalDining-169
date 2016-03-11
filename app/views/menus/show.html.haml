@@ -1,0 +1,7 @@
+%h1 #{@menu.location}, #{@menu.meal}
+
+- @menu.items.each do |item|
+  %p
+    = link_to item.name, item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})
+  
+= link_to 'Back', menus_path
