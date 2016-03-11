@@ -23,9 +23,8 @@ def get_breakfast_items(location)
     if index.nil?
         raise ArgumentError, "Invalid location name: #{location} entered."
     end
-    location_breakfast_items = []
 
-    return get_item_hashes(BREAKFAST_DATA[index], location_breakfast_items)
+    return get_item_hashes(BREAKFAST_DATA[index])
 end
 
 def get_lunch_items(location)
@@ -33,9 +32,8 @@ def get_lunch_items(location)
     if index.nil?
         raise ArgumentError, "Invalid location name: #{location} entered."
     end
-    location_lunch_items = []
 
-    return get_item_hashes(LUNCH_DATA[index], location_lunch_items)
+    return get_item_hashes(LUNCH_DATA[index])
 end
 
 def get_dinner_items(location)
@@ -43,12 +41,13 @@ def get_dinner_items(location)
     if index.nil?
         raise ArgumentError, "Invalid location name: #{location} entered."
     end
-    location_dinner_items = []
 
-    return get_item_hashes(DINNER_DATA[index], location_dinner_items)
+    return get_item_hashes(DINNER_DATA[index])
 end
 
-def get_item_hashes(sub_menu, items)
+def get_item_hashes(sub_menu)
+    items = []
+
     sub_menu.css("a").each do |item|
         item_url = base_url + item.attributes["href"].value
         item_doc = Nokogiri::HTML(open(item_url))
