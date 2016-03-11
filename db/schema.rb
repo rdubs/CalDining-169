@@ -11,12 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160307075902) do
+ActiveRecord::Schema.define(version: 20160311071648) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "nutrition_available"
+    t.string   "calories"
+    t.string   "calories_from_fat"
+    t.string   "total_fat"
+    t.string   "total_fat_percent"
+    t.string   "total_carbohydrates"
+    t.string   "total_carbohydrates_percent"
+    t.string   "saturated_fat"
+    t.string   "saturated_fat_percent"
+    t.string   "dietary_fiber"
+    t.string   "dietary_fiber_percent"
+    t.string   "trans_fat"
+    t.string   "sugars"
+    t.string   "cholesterol"
+    t.string   "cholesterol_percent"
+    t.string   "protein"
+    t.string   "sodium"
+    t.string   "sodium_percent"
+    t.string   "vitamin_c_percent"
+    t.string   "calcium_percent"
+    t.string   "iron_percent"
+    t.string   "allergens"
+    t.string   "ingredients"
   end
 
   create_table "items_menus", id: false, force: :cascade do |t|
