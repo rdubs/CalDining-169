@@ -9,25 +9,25 @@ class MenusController < ApplicationController
     @meals = Menu.meals
     @locations = Menu.locations
     @menus = Menu.all
-    #@selected_meal = ""
-    @selected_location = ""
-
+    params[:meal] ? @selected_meal = params[:meal] : @selected_meal = ""
+    params[:location] ? @selected_location = params[:location] : @selected_location = ""
+    puts params
     #session.clear
-    if params[:meal] && params[:location]
-      #session[:selected_meal] = params[:meal]
-      #session[:selected_location] = params[:location]
-      @selected_meal = params[:meal]
-      @selected_location = params[:location]
-    #elsif session[:selected_meal] && session[:selected_location]
-      #@selected_meal = session[:selected_meal]
-      #@selected_location = session[:selected_location]
-    end
+    # if params[:meal] && params[:location]
+    #   #session[:selected_meal] = params[:meal]
+    #   #session[:selected_location] = params[:location]
+    #   @selected_meal = params[:meal]
+    #   @selected_location = params[:location]
+    # #elsif session[:selected_meal] && session[:selected_location]
+    #   #@selected_meal = session[:selected_meal]
+    #   #@selected_location = session[:selected_location]
+    # end
 
     if @selected_meal and @selected_location
       menu = Menu.where(:meal => @selected_meal, :location => @selected_location).first
       if not menu.nil?
-        id = menu.id
-        redirect_to menu_path(id) and return
+        #id = menu.id
+        redirect_to menu_path(menu.id) and return
       end
     end
   end
@@ -38,55 +38,6 @@ class MenusController < ApplicationController
     @menu = Menu.where(id: params[:id]).first
     @items = @menu.items
     #we have access to meal
-  end
-
-  # GET /menus/new
-  def new
-    @menu = Menu.new
-  end
-
-  # GET /menus/1/edit
-  def edit
-  end
-
-  # POST /menus
-  # POST /menus.json
-  def create
-    @menu = Menu.new(menu_params)
-
-    respond_to do |format|
-      if @menu.save
-        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
-        format.json { render :show, status: :created, location: @menu }
-      else
-        format.html { render :new }
-        format.json { render json: @menu.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /menus/1
-  # PATCH/PUT /menus/1.json
-  def update
-    respond_to do |format|
-      if @menu.update(menu_params)
-        format.html { redirect_to @menu, notice: 'Menu was successfully updated.' }
-        format.json { render :show, status: :ok, location: @menu }
-      else
-        format.html { render :edit }
-        format.json { render json: @menu.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /menus/1
-  # DELETE /menus/1.json
-  def destroy
-    @menu.destroy
-    respond_to do |format|
-      format.html { redirect_to menus_url, notice: 'Menu was successfully destroyed.' }
-      format.json { head :no_content }
-    end
   end
 
   private
