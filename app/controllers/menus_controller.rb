@@ -1,5 +1,4 @@
 require_relative "../dining_web_parser"
-WebMock.disable_net_connect!(:allow_localhost => true)
 
 class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
@@ -12,7 +11,6 @@ class MenusController < ApplicationController
     @menus = Menu.all
     #@selected_meal = ""
     @selected_location = ""
-    @breakfast_data = get_breakfast_data("Crossroads")
 
     #session.clear
     if params[:meal] && params[:location]
