@@ -44,6 +44,7 @@ group :development, :test do
   gem 'capybara', '2.4.4'
 
   gem 'rspec', '3.3.0'
+  gem 'rspec-rails'
   gem 'rspec-autotest', '1.0.0'
 
   gem 'rack-test', '0.6.3'
