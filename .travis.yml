@@ -1,3 +1,5 @@
+env:
+    CODE_CLIMATE_REPO_TOKEN: 56d52e65eea7511997003934
 language: ruby
 rvm:
   - 2.2.2
