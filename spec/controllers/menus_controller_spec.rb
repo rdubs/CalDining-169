@@ -17,6 +17,7 @@ RSpec.describe MenusController, type: :controller do
     
     it "should have the right instance variables" do
       expect(assigns(:meals)).to match_array(['Breakfast', 'Lunch/Brunch', 'Dinner'])
+      expect(assigns(:locations)).to match_array(['Crossroads', 'Cafe 3', 'Foothill', 'Clark Kerr'])
     end
     
     it "should have the current menu location" do
