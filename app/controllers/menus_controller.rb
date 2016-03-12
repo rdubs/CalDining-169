@@ -11,7 +11,6 @@ class MenusController < ApplicationController
     @menus = Menu.all
     params[:meal] ? @selected_meal = params[:meal] : @selected_meal = ""
     params[:location] ? @selected_location = params[:location] : @selected_location = ""
-    puts params
     #session.clear
     # if params[:meal] && params[:location]
     #   #session[:selected_meal] = params[:meal]
@@ -26,7 +25,6 @@ class MenusController < ApplicationController
     if @selected_meal and @selected_location
       menu = Menu.where(:meal => @selected_meal, :location => @selected_location).first
       if not menu.nil?
-        #id = menu.id
         redirect_to menu_path(menu.id) and return
       end
     end
