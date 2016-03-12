@@ -1,3 +1,6 @@
 language: ruby
 rvm:
   - 2.2.2
+script:
+  - rake db:seed RAILS_ENV=test --trace
+  - bundle exec rake
