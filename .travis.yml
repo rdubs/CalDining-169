@@ -2,5 +2,6 @@ language: ruby
 rvm:
   - 2.2.2
 script:
+  - bundle exec rake db:migrate
   - bundle exec rake db:seed RAILS_ENV=test --trace
   - bundle exec rake
