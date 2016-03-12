@@ -10,7 +10,13 @@ module NavigationHelpers
 
     when /^the home\s?page$/
       '/menus'
-
+    when /^the "(.*)" menu page$/
+      loc_meal = $1.split
+      menu = Menu.where(:location => loc_meal[0], :meal => loc_meal[1]).first
+      if menu.nil?
+        '/menus'
+      end
+      "/menus/#{menu.id}"
     else
       begin
         page_name =~ /^the (.*) page$/

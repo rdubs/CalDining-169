@@ -24,27 +24,15 @@ Scenario: Filtering menu by location and meal time
     And I should not see "Cafe 3"
     And I should not see "Breakfast"
 
-# Scenario: Filtering menu by location
-#     When I click on a location from locations tab
-#     Then I should see updated menu for that location (and same time)
-#     When I click on a meal from meals tab
-#     Then I should see updated menu for that meal (same location)
-
-# Scenario: Clicking on a food item should bring up a detailed view
-#     When I click on a food tile with title ‘Mashed Potatoes’
-#     Then I should see a food modal with title ‘Mashed Potatoes’
-#     Then I should see ‘Nutritional Info’
-#     Then I should see ‘Also available at’
-
-# Scenario: Adding a food item from the list of preferences
-#     When I click on ‘Preferences’
-#     Then I should see a preferences modal with title ‘Preferences’
-#     When I click on ‘Add to Preferences’
-#     Then I should see ‘Added to Preferences’
-
-# Scenario: Removing a food item from the list of preferences
-#     When I click on ‘Preferences’
-#     Then I should see a preferences modal with title ‘Preferences’
-#     When I click on ‘Remove from Preferences’
-#     Then I should see ‘Removed from Preferences’
-
+Scenario: Check items at location and meal time
+    When I go to the "Foothill Breakfast" menu page
+    Then I should see "Milk"
+    And I should not see "Coffee"
+    And I should see "Back"
+    When I follow "Milk"
+    Then I should see "Milk"
+    And I should see "Also available for Breakfast at: Crossroads"
+    When I follow "Back"
+    Then I should be on the "Foothill Breakfast" menu page
+    When I follow "Bread"
+    Then I should not see "Also available for Breakfast at:"
