@@ -21,6 +21,8 @@ Scenario: Filtering menu by location and meal time
     Then I should see "Dinner"
     And I should see "Crossroads"
     And I should see "Pizza"
+    And I should not see "Cafe 3"
+    And I should not see "Breakfast"
 
 # Scenario: Filtering menu by location
 #     When I click on a location from locations tab
