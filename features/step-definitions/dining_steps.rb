@@ -58,3 +58,16 @@ end
 When (/^(?:|I )follow "([^"]*)"$/) do |link|
   click_link(link)
 end
+
+# User feature steps
+Then /my account should be created/ do
+  fail "Unimplemented"
+end
+
+Then /I should be logged in/ do
+  fail "Unimplemented"
+end
+
+And /I press the "(.*)" button/ do |button|
+  fail "Unimplemented"
+end
