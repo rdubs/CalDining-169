@@ -1,8 +1,8 @@
 Feature: Enable user authentication 
 
     As a dining hall visitor
-    So that I can post images and receive meal availability notifications
     I want to signup/login on the CalDining website
+    So that I can post images and receive meal availability notifications
 
 Background: On the CalDining-169 home page
 
