@@ -1,7 +1,7 @@
 Feature: Nutrition information for specific items should be available
  
   As a dining hall visitor
-  I would like to know the nutrition facts of specific food items
+  I want to know the nutrition facts of specific food items
   So that I can be healthy in my selection of food
 
 Background: On the CalDining-169 home page
