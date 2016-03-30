@@ -12,17 +12,17 @@ Scenario: Seeing a sign in button on the home page
     Then I should see button "Signin"
 
 Scenario: Creating an account
-    When I press "Signin"
+    When I follow "Signin"
     And I press the "Create an account" button
     And I press "Signup"
     Then my account should be created
 
 Scenario: Signing in with Facebook
-  When I press "Signin"
+  When I follow "Signin"
   And I press the "Sign in with Facebook" button
   Then I should be logged in
   
 Scenario: Signing in with Google
-  When I press "Signin"
+  When I follow "Signin"
   And I press the "Sign in with Google" button
   Then I should be logged in
