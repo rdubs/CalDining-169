@@ -1,40 +1,41 @@
 require 'rubygems'
 require 'open-uri'
 require 'nokogiri'
-
-@base_url = "http://services.housing.berkeley.edu/FoodPro/dining/static/"
-@menu_path = "todaysentrees.asp"
-DOC = Nokogiri::HTML(open(@base_url + @menu_path))
-
-BREAKFAST_DATA = DOC.css("td").select{|candidate| candidate.css("b").text == "Breakfast"}
-LUNCH_DATA = [DOC.css("td").select{|candidate| candidate.css("b").text == "Lunch"}[0],
-            DOC.css("td").select{|candidate| candidate.css("b").text == "Brunch"}[0],
-            DOC.css("td").select{|candidate| candidate.css("b").text == "Lunch/Brunch"}[0],
-            DOC.css("td").select{|candidate| candidate.css("b").text == "Lunch"}[1]]
-DINNER_DATA = DOC.css("td").select{|candidate| candidate.css("b").text == "Dinner"}
-
-MEALS = {"Breakfast" => BREAKFAST_DATA, "Lunch" => LUNCH_DATA, "Dinner" => DINNER_DATA}
-
-#USE AND MODIFY only these variables for relative postioning of locations on the website.
-POSITIONS = {"Crossroads" => 0, "Cafe 3" => 1, "Foothill" => 2, "Clark Kerr" => 3}
-
-#Input: `time` must be one of MEALS' keys; `location` must be one of POSITIONS' keys
-#Output: ARRAY of HASHES; each hash contains item NAME, NUTRITION ATTRIBUTES (e.g. Total Fat, etc)
-#If a location is closed for the particular meal time, you will get back an EMPTY RUBY ARRAY.
-def get_meal_items(time, location)
-  meal = MEALS[time]
-  index = POSITIONS[location]
+def perform
+  @base_url = "http://services.housing.berkeley.edu/FoodPro/dining/static/"
+  @menu_path = "todaysentrees.asp"
+  DOC = Nokogiri::HTML(open(@base_url + @menu_path))
   
-  raise ArgumentError, "Invalid meal time: '#{time}' entered." if meal.nil?
-  raise ArgumentError, "Invalid location name: '#{location}' entered." if index.nil?
+  BREAKFAST_DATA = DOC.css("td").select{|candidate| candidate.css("b").text == "Breakfast"}
+  LUNCH_DATA = [DOC.css("td").select{|candidate| candidate.css("b").text == "Lunch"}[0],
+              DOC.css("td").select{|candidate| candidate.css("b").text == "Brunch"}[0],
+              DOC.css("td").select{|candidate| candidate.css("b").text == "Lunch/Brunch"}[0],
+              DOC.css("td").select{|candidate| candidate.css("b").text == "Lunch"}[1]]
+  DINNER_DATA = DOC.css("td").select{|candidate| candidate.css("b").text == "Dinner"}
   
-  return get_item_hashes(meal[index])
+  MEALS = {"Breakfast" => BREAKFAST_DATA, "Lunch" => LUNCH_DATA, "Dinner" => DINNER_DATA}
+  
+  # USE AND MODIFY only these variables for relative postioning of locations on the website.
+  POSITIONS = {"Crossroads" => 0, "Cafe 3" => 1, "Foothill" => 2, "Clark Kerr" => 3}
+  
+  # TODO: implement assigning items to corresponding menu here
+  for key1 in meals
+    for key2 in positions
+      meal = MEAL[key1]
+      index = POSITIONS[location]
+      submenu = meal[index]
+      get_submenu_items(submenu)
 end
 
-def get_item_hashes(sub_menu)
+# Input: submenu nokogiri object (e.g. Breakfast at Crossroads object)
+# Output: ARRAY of HASHES; each hash contains item NAME, NUTRITION ATTRIBUTES (e.g. Total Fat, etc)
+# If a location is closed for the particular meal time, you will get back an EMPTY RUBY ARRAY.
+
+# TODO: create or get items objects (look up existing ones by name)
+def get_submenu_items(submenu)
   items = []
 
-  sub_menu.css("a").each do |item|
+  submenu.css("a").each do |item|
     item_url = @base_url + item.attributes["href"].value
     item_doc = Nokogiri::HTML(open(item_url))
     item_hash = {}
@@ -104,8 +105,8 @@ def get_item_hashes(sub_menu)
     item_hash["allergens"] = al_match[1] if al_match
 
     # Form: single string (looks like list)
-    i_match = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^INGREDIENTS/}.first.text.gsub("\u00A0", " ").match(/INGREDIENTS:\s+(.*)/)
-    item_hash["ingredients"] = i_match[1] if i_match
+    ing_match = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^INGREDIENTS/}.first.text.gsub("\u00A0", " ").match(/INGREDIENTS:\s+(.*)/)
+    item_hash["ingredients"] = ing_match[1] if ing_match
 
     items << item_hash
   end
