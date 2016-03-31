@@ -194,7 +194,7 @@ Devise.setup do |config|
   config.reset_password_within = 6.hours
   
   # Facebook Omniauth setup
-  config.omniauth :facebook, "205756346461392", "6ce53cd7229f1851df55c7d021c6905f"
+  config.omniauth :facebook, "685414424931530", "dd01400d453e2f17336ec88ba14f8466"
 
   # When set to false, does not sign a user in automatically after their password is
   # reset. Defaults to true, so a user is signed in automatically after a reset.
