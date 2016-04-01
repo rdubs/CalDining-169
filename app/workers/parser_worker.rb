@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'open-uri'
 require 'nokogiri'
+require 'sidekiq'
 
 class ParserWorker
   include Sidekiq::Worker

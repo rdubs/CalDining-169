@@ -8,6 +8,9 @@ gem 'omniauth'
 gem 'omniauth-oauth2', '~> 1.3.1' 
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+# required for parser
+gem 'sidekiq'
+gem 'sidetiq'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use postgres as the database for Active Record
@@ -69,9 +72,6 @@ group :development, :test do
 
   gem 'simplecov', '0.10.0'
   gem 'ZenTest', '4.11.0'
-  
-  gem 'sidekiq'
-  gem 'sidetiq'
 end
 
 group :development do
