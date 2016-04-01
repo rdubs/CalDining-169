@@ -60,14 +60,29 @@ When (/^(?:|I )follow "([^"]*)"$/) do |link|
 end
 
 # User feature steps
-Then /my account should be created/ do
-  fail "Unimplemented"
-end
-
 Then /I should be logged in/ do
-  fail "Unimplemented"
+  visit('/menus')
+  page.should have_content('test@test.com')
 end
 
 And /I press the "(.*)" button/ do |button|
   fail "Unimplemented"
+end
+
+When /^I sign up with an email and password/ do
+  email = 'test@test.com'
+  password = 'test1234'
+  fill_in('Email', :with => email)
+  fill_in('Password', :with => password)
+  fill_in('Password confirmation', :with => password)
+  click_button 'Sign up'
+end
+
+And /I authenticate with "(.*)"/ do |provider|
+  puts provider
+  visit "/users/auth/#{provider.downcase}"
+end 
+
+Then /I should see a link to sign in/ do
+  page.should have_content('Signin')
 end
