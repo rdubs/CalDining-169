@@ -2,6 +2,12 @@ source 'https://rubygems.org'
 
 # required for the parser
 gem 'nokogiri'
+# required for user model
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-oauth2', '~> 1.3.1' 
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use postgres as the database for Active Record
