@@ -3,6 +3,7 @@ require 'open-uri'
 require 'nokogiri'
 
 class ParserWorker
+  require 'sidekiq'
   include Sidekiq::Worker
 
   def perform(*args)
