@@ -18,7 +18,7 @@ class ParserWorker
                 doc.css("td").select{|candidate| candidate.css("b").text == "Lunch"}[1]]
     dinner_data = doc.css("td").select{|candidate| candidate.css("b").text == "Dinner"}
     
-    meals = {"Breakfast" => breakfast_data, "Lunch" => lunch_data, "Dinner" => dinner_data}
+    meals = {"Breakfast" => breakfast_data, "Lunch/Brunch" => lunch_data, "Dinner" => dinner_data}
     
     # USE AND MODIFY only these variables for relative postioning of locations on the website.
     positions = {"Crossroads" => 0, "Cafe 3" => 1, "Foothill" => 2, "Clark Kerr" => 3}
@@ -63,7 +63,7 @@ class ParserWorker
         curr_item.nutrition_available = false
         curr_item.save
         items << curr_item
-        break
+        next
       end
   
       c_match = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Calories/}.first.text.match(/^Calories.(\d*)/)
