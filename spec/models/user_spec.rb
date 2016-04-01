@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "creates an omniauth user" do
+  faker = double('access_token', :info => {
+    :uid => '12345',
+    :info => {
+      :name => 'facebookuser',
+      :email => 'test@test.com'
+    }})
+    User.from_omniauth(faker)
+  end
 end
