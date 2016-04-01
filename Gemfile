@@ -63,6 +63,9 @@ group :development, :test do
 
   gem 'simplecov', '0.10.0'
   gem 'ZenTest', '4.11.0'
+  
+  gem 'sidekiq'
+  gem 'sidetiq'
 end
 
 group :development do

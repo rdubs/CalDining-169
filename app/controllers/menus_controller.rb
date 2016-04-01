@@ -1,4 +1,4 @@
-require_relative "../dining_web_parser"
+# require_relative "../dining_web_parser"
 
 class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
