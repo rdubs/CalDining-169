@@ -11,7 +11,7 @@ class ParserWorker
     daily.hour_of_day(7)
   end
   
-  def perform(*args)
+  def perform
     @base_url = "http://services.housing.berkeley.edu/FoodPro/dining/static/"
     @menu_path = "todaysentrees.asp"
     doc = Nokogiri::HTML(open(@base_url + @menu_path))
@@ -71,63 +71,63 @@ class ParserWorker
         next
       end
   
-      c_match = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Calories/}.first.text.match(/^Calories.(\d*)/)
+      c_match = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^Calories/}.text.match(/^Calories.(\d*)/)
       curr_item.calories = c_match[1] if c_match
   
-      cff_match = item_doc.css("font").select{|candidate| candidate.text =~ /Calories from/}.first.text.match(/Calories from Fat.(\d*)/)
+      cff_match = item_doc.css("font").find{|candidate| candidate.text =~ /Calories from/}.text.match(/Calories from Fat.(\d*)/)
       curr_item.calories_from_fat = cff_match[1] if cff_match
   
-      tf_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Total/}.first.next.text
+      tf_text = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^Total/}.next.text
       curr_item.total_fat = tf_text if tf_text
       curr_item.total_fat_percent = (curr_item.total_fat[0..-2].to_f / 65 * 100).round.to_s if tf_text
   
-      tc_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Tot\./}.first.next.text
+      tc_text = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^Tot\./}.next.text
       curr_item.total_carbohydrates = tc_text if tc_text
       curr_item.total_carbohydrates_percent = (curr_item.total_carbohydrates[0..-2].to_f / 300 * 100).round.to_s if tc_text
   
-      sf_text = item_doc.css("font").select{|candidate| candidate.text =~ /Sat\./}.first.next.text
+      sf_text = item_doc.css("font").find{|candidate| candidate.text =~ /Sat\./}.next.text
       curr_item.saturated_fat = sf_text if sf_text
       curr_item.saturated_fat_percent = (curr_item.saturated_fat[0..-2].to_f / 20 * 100).round.to_s if sf_text
   
-      df_text = item_doc.css("font").select{|candidate| candidate.text =~ /Dietary/}.first.next.text
+      df_text = item_doc.css("font").find{|candidate| candidate.text =~ /Dietary/}.next.text
       curr_item.dietary_fiber = df_text if df_text
       curr_item.dietary_fiber_percent = (curr_item.dietary_fiber[0..-2].to_f / 25 * 100).round.to_s if df_text
   
-      trf_text = item_doc.css("font").select{|candidate| candidate.text =~ /Trans/}.first.next.text
+      trf_text = item_doc.css("font").find{|candidate| candidate.text =~ /Trans/}.next.text
       curr_item.trans_fat = trf_text if trf_text
   
-      su_text = item_doc.css("font").select{|candidate| candidate.text =~ /Sugars/}.first.next.text
+      su_text = item_doc.css("font").find{|candidate| candidate.text =~ /Sugars/}.next.text
       curr_item.sugars = su_text if su_text
   
-      ch_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Cholesterol/}.first.next.text
+      ch_text = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^Cholesterol/}.next.text
       curr_item.cholesterol = ch_text if ch_text
       curr_item.cholesterol_percent = (curr_item.cholesterol[0..-3].to_f / 300 * 100).round.to_s if ch_text
   
-      p_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Protein/}.first.next.text
+      p_text = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^Protein/}.next.text
       curr_item.protein = p_text if p_text
   
-      sd_text = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^Sodium/}.first.next.text
+      sd_text = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^Sodium/}.next.text
       curr_item.sodium = sd_text if sd_text
       curr_item.sodium_percent = (curr_item.sodium[0..-3].to_f / 2400 * 100).round.to_s if sd_text
   
       # Percentage
-      vc_match = item_doc.css("font").select{|candidate| candidate.text =~ /Vitamin C/}.first.next.next.text.match(/(\d*)%\z/)
+      vc_match = item_doc.css("font").find{|candidate| candidate.text =~ /Vitamin C/}.next.next.text.match(/(\d*)%\z/)
       curr_item.vitamin_c_percent = vc_match[1] if vc_match
   
       # Percentage
-      ca_match = item_doc.css("font").select{|candidate| candidate.text =~ /Calcium/}.first.next.next.text.match(/(\d*)%\z/)
+      ca_match = item_doc.css("font").find{|candidate| candidate.text =~ /Calcium/}.next.next.text.match(/(\d*)%\z/)
       curr_item.calcium_percent = ca_match[1] if ca_match
   
       # Percentage
-      fe_match = item_doc.css("font").select{|candidate| candidate.text =~ /Iron/}.first.next.next.text.match(/(\d*)%\z/)
+      fe_match = item_doc.css("font").find{|candidate| candidate.text =~ /Iron/}.next.next.text.match(/(\d*)%\z/)
       curr_item.iron_percent = fe_match[1] if fe_match
   
       # Form: single string (looks like list)
-      al_match = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^ALLERGENS/}.first.text.gsub("\u00A0", " ").match(/ALLERGENS:\s+(.*)/)
+      al_match = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^ALLERGENS/}.text.gsub("\u00A0", " ").match(/ALLERGENS:\s+(.*)/)
       curr_item.allergens = al_match[1] if al_match
   
       # Form: single string (looks like list)
-      ing_match = item_doc.css("font").select{|candidate| candidate.css("b").text =~ /^INGREDIENTS/}.first.text.gsub("\u00A0", " ").match(/INGREDIENTS:\s+(.*)/)
+      ing_match = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^INGREDIENTS/}.text.gsub("\u00A0", " ").match(/INGREDIENTS:\s+(.*)/)
       curr_item.ingredients = ing_match[1] if ing_match
     
       curr_item.save
