@@ -28,10 +28,15 @@ class ParserWorker
     # USE AND MODIFY only these variables for relative postioning of locations on the website.
     positions = {"Crossroads" => 0, "Cafe 3" => 1, "Foothill" => 2, "Clark Kerr" => 3}
     
-    # Clear each item's list of menus each day
+    # Clear each item's list of menus, and each menu's list of items
     Item.all.each do |item|
       item.menus.clear
       item.save
+    end
+    
+    Menu.all.each do |menu|
+      menu.items.clear
+      menu.save
     end
     
     # Populate each submenu with its meal items
