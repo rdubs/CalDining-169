@@ -48,6 +48,7 @@ class ParserWorker
         curr_menu = Menu.find_or_create_by(meal: meal_name, location: location_name)
         curr_menu.items = get_submenu_items(submenu_data, curr_menu)
         curr_menu.save
+        curr_menu.reload
       end
     end
   end
@@ -136,6 +137,7 @@ class ParserWorker
       curr_item.ingredients = ing_match[1] if ing_match
     
       curr_item.save
+      curr_item.reload
       items << curr_item
     end
   

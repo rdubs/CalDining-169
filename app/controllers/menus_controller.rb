@@ -34,7 +34,7 @@ class MenusController < ApplicationController
   # GET /menus/1.json
   def show
     @menu = Menu.where(id: params[:id]).first
-    @items = @menu.items
+    @items = @menu.items.all(:order => :updated_at)
     #we have access to meal
   end
 
