@@ -61,7 +61,7 @@ class ParserWorker
       curr_item = Item.find_or_create_by(name: item.text)
       curr_item.menus << submenu_record
     
-      # Check nutrition availability. If unavailable, add to items and break.
+      # Check nutrition availability. If unavailable, add to items and skip to next iter.
       if item_doc.css("font").select{|candidate| candidate.css("i").text =~ /^Nutritional Information is not available/}.empty?
         curr_item.nutrition_available = true
       else
@@ -123,11 +123,11 @@ class ParserWorker
       curr_item.iron_percent = fe_match[1] if fe_match
   
       # Form: single string (looks like list)
-      al_match = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^ALLERGENS/}.text.gsub("\u00A0", " ").match(/ALLERGENS:\s+(.*)/)
+      al_match = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^ALLERGENS/}.text.tr("\u00A0", " ").match(/ALLERGENS:\s+(.*)/)
       curr_item.allergens = al_match[1] if al_match
   
       # Form: single string (looks like list)
-      ing_match = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^INGREDIENTS/}.text.gsub("\u00A0", " ").match(/INGREDIENTS:\s+(.*)/)
+      ing_match = item_doc.css("font").find{|candidate| candidate.css("b").text =~ /^INGREDIENTS/}.text.tr("\u00A0", " ").match(/INGREDIENTS:\s+(.*)/)
       curr_item.ingredients = ing_match[1] if ing_match
     
       curr_item.save
