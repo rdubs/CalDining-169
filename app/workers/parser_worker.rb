@@ -73,6 +73,7 @@ class ParserWorker
       else
         curr_item.nutrition_available = false
         curr_item.save
+        curr_item.reload
         items << curr_item
         next
       end
