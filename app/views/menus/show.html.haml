@@ -1,9 +1,13 @@
-.navbar
-  = render 'shared/navbar'
-%h1 #{@menu.location}, #{@menu.meal}
+.container
+  .navbar.clear
+    = render 'shared/navbar'
+.container-big.clear  
+  .header #{@menu.meal} at #{@menu.location}
+  - @menu.items.each do |item|
+    .item-container
+      .item-image-container
+      .item-text-container
+        = link_to item.name, item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})
 
-- @menu.items.each do |item|
-  %p
-    = link_to item.name, item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})
-  
-= link_to 'Back', menus_path
+.container      
+  = link_to 'Back', menus_path
