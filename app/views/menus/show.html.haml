@@ -2,7 +2,7 @@
   = render 'shared/navbar'
 %h1 #{@menu.location}, #{@menu.meal}
 
-- @menu.items.each do |item|
+- @items.each do |item|
   %p
     = link_to item.name, item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})
   
