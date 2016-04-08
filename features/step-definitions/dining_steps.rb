@@ -60,16 +60,16 @@ When (/^(?:|I )follow "([^"]*)"$/) do |link|
 end
 
 # User feature steps
-Then /I should be logged in/ do
+Then (/I should be logged in/) do
   visit('/menus')
   page.should have_content('test@test.com')
 end
 
-And /I press the "(.*)" button/ do |button|
+And (/I press the "(.*)" button/) do |button|
   fail "Unimplemented"
 end
 
-When /^I sign up with an email and password/ do
+When (/^I sign up with an email and password/) do
   email = 'test@test.com'
   password = 'test1234'
   fill_in('Email', :with => email)
@@ -78,11 +78,61 @@ When /^I sign up with an email and password/ do
   click_button 'Sign up'
 end
 
-And /I authenticate with "(.*)"/ do |provider|
+And (/I authenticate with "(.*)"/) do |provider|
   puts provider
   visit "/users/auth/#{provider.downcase}"
 end 
 
-Then /I should see a link to sign in/ do
+Then (/I should see a link to sign in/) do
   page.should have_content('Signin')
 end
+
+###################
+
+Given (/^I am signed in as admin$/) do
+  page.should have_content('test@test.com') 
+end
+
+When (/^I click on "([^"]*)"$/) do |arg1|
+  fail "Unimplemented"
+end
+
+Then (/^I should see "([^"]*)" images$/) do |arg1|
+  fail "Unimplemented"
+end
+
+When (/^I mark an image (\d+) as inappropriate$/) do |arg1|
+  fail "Unimplemented"
+end
+
+Then (/^I should not see image (\d+)$/) do |arg1|
+  fail "Unimplemented"
+end
+
+Then (/^I should see image (\d+)$/) do |arg1|
+  fail "Unimplemented"
+end
+
+When (/^I mark an image (\d+) as appropriate$/) do |arg1|
+  fail "Unimplemented"
+end
+
+Then (/^I see a tile layout$/) do
+  fail "Unimplemented"
+end
+
+Given (/^I am signed in as user$/) do
+  fail "Unimplemented"
+end
+
+Then (/^I upload an image$/) do
+  fail "Unimplemented"
+end
+
+Then (/^I upload a malformed image$/) do
+  fail "Unimplemented"
+end
+
+
+
+

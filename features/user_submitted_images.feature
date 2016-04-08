@@ -7,8 +7,9 @@ Feature: Users can submit images of food items
 Background: On the CalDining-169 home page
 
     Given I am on the home page
-    And I am signed in as user
-
+    And I authenticate with "facebook"
+    Then I should be logged in
+  
 Scenario: Upload image for food item
     
     When I choose "Dinner"
