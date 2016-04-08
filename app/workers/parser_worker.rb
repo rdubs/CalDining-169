@@ -65,6 +65,7 @@ class ParserWorker
       
       # NOTE: currently, we always update existing item records; maybe allow skipping in future?
       curr_item = Item.find_or_create_by(name: item.text)
+      next if curr_item.menus.include?(submenu_record)
       curr_item.menus << submenu_record
     
       # Check nutrition availability. If unavailable, add to items and skip to next iter.
