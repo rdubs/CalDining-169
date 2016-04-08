@@ -3,7 +3,7 @@
     = render 'shared/navbar'
   .header #{@menu.meal} at #{@menu.location}
 .container-big.clear  
-  - @menu.items.each do |item|
+  - @items.each do |item|
     %a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
       .item-container
         .item-image-container

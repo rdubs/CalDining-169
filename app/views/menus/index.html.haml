@@ -7,11 +7,11 @@
   = form_tag menus_path, {:method => :get, id: "menus_form", class: "clear"} do
     .radios.location
       - @locations.each do |location|
-        = radio_button_tag :location, "#{location}", 0, :id => "#{location.gsub(' ','_')}", :class => 'radio'
+        = radio_button_tag :location, "#{location}", 0, :id => "#{location.tr(' ','_')}", :class => 'radio'
         = label_tag location, location.titleize, class: 'radio'
     .radios.meal 
       - @meals.each do |meal|
-        = radio_button_tag :meal, "#{meal}", 0, :id => "#{meal.gsub('/','_')}", :class => 'radio'
+        = radio_button_tag :meal, "#{meal}", 0, :id => "#{meal.tr('/','_')}", :class => 'radio'
         = label_tag meal, meal.titleize, class: 'radio'
     = submit_tag 'Submit', id: "menus_submit"
   #temp
