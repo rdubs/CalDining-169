@@ -66,7 +66,7 @@ Then (/I should be logged in/) do
 end
 
 And (/I press the "(.*)" button/) do |button|
-  fail "Unimplemented"
+  pending
 end
 
 When (/^I sign up with an email and password/) do
@@ -90,47 +90,47 @@ end
 ###################
 
 Given (/^I am signed in as admin$/) do
-  page.should have_content('test@test.com') 
+  pending
 end
 
 When (/^I click on "([^"]*)"$/) do |arg1|
-  fail "Unimplemented"
+  pending
 end
 
 Then (/^I should see "([^"]*)" images$/) do |arg1|
-  fail "Unimplemented"
+  pending
 end
 
 When (/^I mark an image (\d+) as inappropriate$/) do |arg1|
-  fail "Unimplemented"
+  pending
 end
 
 Then (/^I should not see image (\d+)$/) do |arg1|
-  fail "Unimplemented"
+  pending
 end
 
 Then (/^I should see image (\d+)$/) do |arg1|
-  fail "Unimplemented"
+  pending
 end
 
 When (/^I mark an image (\d+) as appropriate$/) do |arg1|
-  fail "Unimplemented"
+  pending
 end
 
 Then (/^I see a tile layout$/) do
-  fail "Unimplemented"
+  pending
 end
 
 Given (/^I am signed in as user$/) do
-  fail "Unimplemented"
+  pending
 end
 
 Then (/^I upload an image$/) do
-  fail "Unimplemented"
+  pending
 end
 
 Then (/^I upload a malformed image$/) do
-  fail "Unimplemented"
+  pending
 end
 
 
