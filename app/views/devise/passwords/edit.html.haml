@@ -1,0 +1,19 @@
+.container
+  .navbar.clear
+    = render 'shared/navbar'
+  .container.login-container 
+    .header Change your password
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      = devise_error_messages!
+      = f.hidden_field :reset_password_token
+      .field
+        - if @minimum_password_length
+          %em
+            (#{@minimum_password_length} characters minimum)
+          %br/
+        = f.password_field :password, placeholder: 'New Password', autofocus: true, autocomplete: "off", class: 'login-input'
+      .field
+        = f.password_field :password_confirmation, placeholder: 'New Password Confifmation', autocomplete: "off", class: 'login-input'
+      .actions
+        = f.submit "Change my password", class: 'login-action'
+    = render "devise/shared/links"

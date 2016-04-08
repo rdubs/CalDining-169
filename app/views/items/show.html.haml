@@ -1,19 +1,28 @@
-.navbar
-    = render 'shared/navbar'
-%h1 #{@item.name} 
-%p Available at #{@location} for #{@meal}
-%ul
-    %li Nutrition Facts
-    %li Calories: #{@item.calories}
-    %li Total Fat: #{@item.total_fat}
-    %li Cholesterol: #{@item.cholesterol}
-    %li Sodium: #{@item.sodium}
-    %li Dietary Fiber: #{@item.dietary_fiber}
-    %li Vitamin C: #{@item.vitamin_c_percent}
-    %li Allergens: #{@item.allergens}
-    %li Ingredients: #{@item.ingredients}
-- if not @other_locations.empty?
-    %p Also available for #{@meal} at:
-    - @other_locations.each do |location|
-        %p #{location.location}
-= link_to 'Back', menu_path(@menu_id)
+.container
+    .navbar.clear
+        = render 'shared/navbar'
+.container
+    .header #{@item.name} 
+    %div 
+        Available for #{@meal} at #{@location}
+    - if not @item.nutrition_available.nil?
+        %ul
+            %li Nutrition Facts
+            %li Calories: #{@item.calories}
+            %li Total Fat: #{@item.total_fat}
+            %li Cholesterol: #{@item.cholesterol}
+            %li Sodium: #{@item.sodium}
+            %li Dietary Fiber: #{@item.dietary_fiber}
+            - if not @item.vitamin_c_percent.nil?
+                %li Vitamin C: #{@item.vitamin_c_percent + '%'}
+            %li Allergens: #{@item.allergens}
+            %li Ingredients: #{@item.ingredients}
+    - else 
+        %p No nutrition information available
+    - if not @other_locations.empty?
+        %p Also available for #{@meal} at:
+        - @other_locations.each do |location|
+            %div
+                = link_to location.location, menu_path(location.id)
+    %br
+    = link_to 'Back', menu_path(@menu_id)

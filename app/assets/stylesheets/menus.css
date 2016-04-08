@@ -1,0 +1,66 @@
+.header {
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.container-big {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.item-container {
+    width: 25%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.item-text-container {
+    margin-top: 8px;
+    padding: 10px 0;
+}
+
+.item-image-container {
+    height: 200px;
+    background: #f3f3f3;
+}
+
+.radios {
+    float: left;
+    margin-right: 20px;
+}
+
+.radios.meal {
+    float: left;
+}
+
+.radios.location {
+    float: left;
+}
+
+.radios .radio {
+    background-color:#99999a;
+    display:inline-block;
+    padding: 10px 20px;
+    color: #fff;
+}
+
+.radios input[type=radio]{
+    display:none
+}
+
+.radios input[type=radio]:checked + .radio{
+    background-color: #241009;
+    color: white;
+}
+
+.radio {
+    cursor: pointer;
+    border-radius: 3px;
+}

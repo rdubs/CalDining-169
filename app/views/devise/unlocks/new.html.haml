@@ -1,0 +1,15 @@
+.container
+  .navbar.clear
+    = render 'shared/navbar'
+  .container.login-container
+    .header Resend unlock instructions
+    = form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      .field
+        = f.email_field :email, placeholder: 'Email', autofocus: true, class: 'login-input'
+      .actions
+        = f.submit "Resend unlock instructions", class: 'login-action'
+    = render "devise/shared/links"
+    .actions
+      = f.submit "Log in", class: 'login-action'
+    = render "devise/shared/links"
