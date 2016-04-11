@@ -7,5 +7,6 @@
     %a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
       .item-container
         .item-image-container
+          %img{:src => '/items/' + item.id.to_s + '/first_image', :height => 200, :width => 225}
         .item-text-container
           = item.name
