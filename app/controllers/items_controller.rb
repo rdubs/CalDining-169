@@ -14,9 +14,14 @@ class ItemsController < ApplicationController
   def upload_picture
     uploaded_io = params[:picture]
     extension = File.extname(uploaded_io.original_filename)
-    File.open(Rails.root.join('app', 'user_uploads', 'niceness'+extension), 'wb') do |file|
+    filename = 'niceness'+extension
+    File.open(Rails.root.join('app', 'user_uploads', filename), 'wb') do |file|
       file.write(uploaded_io.read)
     end
+    new_img = Image.new(:filename => filename)
+    item = Item.where(:id => params[:id]).first
+    new_img.item = item
+    new_img.save
     redirect_to menus_path
   end
 
