@@ -10,7 +10,16 @@ class ItemsController < ApplicationController
     item = Item.where(:id => params[:id]).first
     @other_locations = item.menus.where(:meal => @meal).reject {|menu|  menu.location == @location}
   end
-  
+
+  def upload_picture
+    uploaded_io = params[:picture]
+    extension = File.extname(uploaded_io.original_filename)
+    File.open(Rails.root.join('app', 'user_uploads', 'niceness'+extension), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
+    redirect_to menus_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item

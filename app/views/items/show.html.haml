@@ -25,4 +25,8 @@
             %div
                 = link_to location.location, menu_path(location.id)
     %br
+    = form_tag({action: :upload_picture}, multipart: true) do
+        = file_field_tag 'picture'
+        = submit_tag 'Upload'
+    %br
     = link_to 'Back', menu_path(@menu_id)
