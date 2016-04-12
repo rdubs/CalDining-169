@@ -1,0 +1,32 @@
+.header {
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.container-big {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+.item-container {
+    width: 25%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.item-text-container {
+    margin-top: 8px;
+    padding: 10px 0;
+}
+
+.item-image-container {
+    height: 200px;
+    background: #f3f3f3;
+}

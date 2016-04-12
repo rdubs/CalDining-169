@@ -1,2 +1,13 @@
-%h1 Admin#pending
-%p Find me in app/views/admin/pending.html.haml
+.container
+  .navbar.clear
+    = render 'shared/navbar'
+  .header PENDING IMAGES TO BE APPROVED
+.container-big.clear  
+  - @pending_images.each do |image|
+    .item-container
+      .item-image-container
+        =image_tag 'app/user_uploads/' + image.filename.to_s
+        =button_to 'Disapprove image', image_disapprove_path(image.id)
+        %img{:src => 'app/user_uploads/' + image.filename.to_s, :height => 200, :width => 225}
+      .item-text-container
+        = image.item.name
