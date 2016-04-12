@@ -9,6 +9,7 @@ class AdminController < ApplicationController
     end
     
     def disapproved
+        @disapproved_images = Image.where(state=@disapproved)
     end
     
     private
