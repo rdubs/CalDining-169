@@ -1,0 +1,10 @@
+%h1 Admin users
+- @admin.each do |admin|
+    =admin.email
+    %br
+%br
+%h1 Non Admin users
+- @nonadmin.each do |nonadmin|
+    =nonadmin.email
+    %span 
+        =button_to 'Make Admin', update_path(nonadmin.id), method: :put 

@@ -9,6 +9,18 @@ class AdminController < ApplicationController
         @disapproved_images = Image.where(state: 2)
     end
     
+    def adminuser
+        @admin = User.where(admin: true)
+        @nonadmin = User.where(admin: false)
+    end
+    
+    def update
+        user = User.where(id: params[:id]).first
+        user.update_attribute :admin, true
+        user.save!
+        redirect_to adminuser_path
+    end
+    
     private
         def redirect_non_admin
             if not current_user or not current_user.admin?
