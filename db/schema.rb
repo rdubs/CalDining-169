@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160412045002) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "state"
   end
 
   add_index "images", ["item_id"], name: "index_images_on_item_id"

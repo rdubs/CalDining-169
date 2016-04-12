@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:upload_picture]
 
   # GET /items/1
   # GET /items/1.json
@@ -7,21 +8,21 @@ class ItemsController < ApplicationController
     @meal = params[:meal]
     @location = params[:location]
     @menu_id = Menu.where(:meal => @meal, :location => @location).first.id
-    item = Item.where(:id => params[:id]).first
-    @other_locations = item.menus.where(:meal => @meal).reject {|menu|  menu.location == @location}
+    @item = Item.where(:id => params[:id]).first
+    @images = @item.images.where(state: 1)
+    @other_locations = @item.menus.where(:meal => @meal).reject {|menu|  menu.location == @location}
   end
 
   def upload_picture
     uploaded_io = params[:picture]
     extension = File.extname(uploaded_io.original_filename)
-    filename = 'niceness'+extension
+    item = Item.where(:id => params[:id]).first
+    filename = item.id.to_s + "_" + (item.images.length + 1).to_s + extension
+    new_img = Image.new(:filename => filename, :state => 0, :item => item, :user => current_user)
+    new_img.save
     File.open(Rails.root.join('app', 'user_uploads', filename), 'wb') do |file|
       file.write(uploaded_io.read)
     end
-    new_img = Image.new(:filename => filename)
-    item = Item.where(:id => params[:id]).first
-    new_img.item = item
-    new_img.save
     redirect_to menus_path
   end
 
