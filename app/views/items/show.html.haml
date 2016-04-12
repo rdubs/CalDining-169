@@ -8,7 +8,8 @@
     .container
         - @images.each do |image|
             =image_tag 'app/user_uploads/' + image.filename.to_s
-            =button_to 'Disapprove image', image_disapprove_path(image.id)
+            - if user_signed_in? && current_user.admin?
+                =button_to 'Disapprove image', image_disapprove_path(image.id)
     - if not @item.nutrition_available.nil?
         %ul
             %li Nutrition Facts
