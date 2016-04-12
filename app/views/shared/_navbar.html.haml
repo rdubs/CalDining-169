@@ -1,6 +1,11 @@
 .container
-  #home-item
+  .home-item
     = link_to 'Home', menus_path
+    - if user_signed_in? && current_user.admin?
+      .home-item
+      = link_to 'Pending', pending_path
+      .home-item
+      = link_to 'Disapproved', disapproved_path
   - if user_signed_in?
     .navbar-item
       = link_to 'Sign out', destroy_user_session_path, method: :delete
