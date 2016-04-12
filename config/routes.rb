@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :items
   post '/items/:id/upload' => 'items#upload_picture'
   get '/items/:id/first_image' => 'items#serve_first_image'
+  post '/images/:id/approve' => 'images#approve', as: 'image_approve'
+  post '/images/:id/disapprove' => 'images#disapprove', as: 'image_disapprove'
   root 'menus#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
