@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :admin
   post '/items/:id/upload' => 'items#upload_picture'
   get '/items/:id/first_image' => 'items#serve_first_image'
+  post '/images/:id/approve' => 'images#approve', as: 'image_approve'
+  post '/images/:id/disapprove' => 'images#disapprove', as: 'image_disapprove'
   get '/pending' => 'admin#pending'
   get '/disapproved' => 'admin#disapproved'
   root 'menus#index'
