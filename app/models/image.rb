@@ -3,7 +3,7 @@ class Image < ActiveRecord::Base
     belongs_to :item
 
     def self.get_first_image(item)
-        first_image = item.images.first
+        first_image = item.images.where(state: 1).first
         if first_image
             return "app/user_uploads/#{first_image.filename}"
         else

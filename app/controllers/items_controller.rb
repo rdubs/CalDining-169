@@ -8,8 +8,9 @@ class ItemsController < ApplicationController
     @meal = params[:meal]
     @location = params[:location]
     @menu_id = Menu.where(:meal => @meal, :location => @location).first.id
-    item = Item.where(:id => params[:id]).first
-    @other_locations = item.menus.where(:meal => @meal).reject {|menu|  menu.location == @location}
+    @item = Item.where(:id => params[:id]).first
+    @images = @item.images.where(state: 1)
+    @other_locations = @item.menus.where(:meal => @meal).reject {|menu|  menu.location == @location}
   end
 
   def upload_picture

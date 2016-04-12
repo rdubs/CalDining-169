@@ -5,6 +5,9 @@
     .header #{@item.name}
     %div
         Available for #{@meal} at #{@location}
+    .container
+        - @images.each do |image|
+            =image_tag 'app/user_uploads/' + image.filename.to_s
     - if not @item.nutrition_available.nil?
         %ul
             %li Nutrition Facts
