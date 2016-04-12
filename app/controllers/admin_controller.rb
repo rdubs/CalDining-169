@@ -16,7 +16,7 @@ class AdminController < ApplicationController
     
     def update
         user = User.where(id: params[:id]).first
-        user.update_attribute :admin, true
+        user.update_attribute :admin, !user.admin
         user.save!
         redirect_to adminuser_path
     end
