@@ -6,6 +6,8 @@
       = link_to 'Pending', pending_path
       .home-item
       = link_to 'Disapproved', disapproved_path
+      .home-item
+      = link_to 'Adminusers', adminuser_path
   - if user_signed_in?
     .navbar-item
       = link_to 'Sign out', destroy_user_session_path, method: :delete
