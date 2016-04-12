@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post '/images/:id/disapprove' => 'images#disapprove', as: 'image_disapprove'
   get '/pending' => 'admin#pending'
   get '/disapproved' => 'admin#disapproved'
+  get '/adminuser' => 'admin#adminuser'
+  put '/admin/:id' => 'admin#update', as: 'update'
   root 'menus#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
