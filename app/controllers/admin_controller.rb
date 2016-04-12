@@ -18,7 +18,11 @@ class AdminController < ApplicationController
         user = User.where(id: params[:id]).first
         user.update_attribute :admin, !user.admin
         user.save!
-        redirect_to adminuser_path
+        if current_user.admin?
+            redirect_to adminuser_path
+        else
+            redirect_to root_path
+        end
     end
     
     private
