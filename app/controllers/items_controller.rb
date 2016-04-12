@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:upload_picture]
 
   # GET /items/1
   # GET /items/1.json
@@ -16,7 +17,7 @@ class ItemsController < ApplicationController
     extension = File.extname(uploaded_io.original_filename)
     item = Item.where(:id => params[:id]).first
     filename = item.id.to_s + "_" + (item.images.length + 1).to_s + extension
-    new_img = Image.new(:filename => filename, :state => 0, :item => item)
+    new_img = Image.new(:filename => filename, :state => 0, :item => item, :user => current_user)
     new_img.save
     File.open(Rails.root.join('app', 'user_uploads', filename), 'wb') do |file|
       file.write(uploaded_io.read)

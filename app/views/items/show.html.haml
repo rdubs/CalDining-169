@@ -2,8 +2,8 @@
     .navbar.clear
         = render 'shared/navbar'
 .container
-    .header #{@item.name} 
-    %div 
+    .header #{@item.name}
+    %div
         Available for #{@meal} at #{@location}
     - if not @item.nutrition_available.nil?
         %ul
@@ -17,7 +17,7 @@
                 %li Vitamin C: #{@item.vitamin_c_percent + '%'}
             %li Allergens: #{@item.allergens}
             %li Ingredients: #{@item.ingredients}
-    - else 
+    - else
         %p No nutrition information available
     - if not @other_locations.empty?
         %p Also available for #{@meal} at:
@@ -25,8 +25,9 @@
             %div
                 = link_to location.location, menu_path(location.id)
     %br
-    = form_tag({action: :upload_picture}, multipart: true) do
-        = file_field_tag 'picture'
-        = submit_tag 'Upload'
+    - if user_signed_in?
+        = form_tag({action: :upload_picture}, multipart: true) do
+            = file_field_tag 'picture'
+            = submit_tag 'Upload'
     %br
     = link_to 'Back', menu_path(@menu_id)
