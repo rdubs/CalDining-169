@@ -1,15 +1,12 @@
 class AdminController < ApplicationController
     before_action :redirect_non_admin
     # 0 pending, 1 approved, 2 disapproved
-    @pending = 0
-    @approved = 1
-    @disapproved = 2
     def pending
-        @pending_images = Image.where(state=@pending)
+        @pending_images = Image.where(state: 0)
     end
     
     def disapproved
-        @disapproved_images = Image.where(state=@disapproved)
+        @disapproved_images = Image.where(state: 2)
     end
     
     private
