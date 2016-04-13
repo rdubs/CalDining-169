@@ -1,8 +1,11 @@
 .container
   .navbar.clear
     = render 'shared/navbar'
-  .header PENDING IMAGES TO BE APPROVED
-.container-big.clear  
+  .header Pending Images
+.container-big.clear
+  - if @pending_images.empty? 
+    .notice No pending images. You're all caught up! 
+  - else
   - @pending_images.each do |image|
     .item-container
       .item-image-container

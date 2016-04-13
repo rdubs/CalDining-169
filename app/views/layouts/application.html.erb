@@ -6,6 +6,15 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <script>
+      $(document).ready(function(){
+      	var $container = $('.masonry-container');
+		// initialize Masonry after all images have loaded  
+		$container.imagesLoaded( function() {
+		    $container.masonry({columnWidth: 0, itemSelector: '.item-container'});
+		});
+      })
+  </script>
 </head>
 <body>
 

@@ -61,11 +61,6 @@ ActiveRecord::Schema.define(version: 20160412045002) do
 
   add_index "items_menus", ["item_id", "menu_id"], name: "index_items_menus_on_item_id_and_menu_id", unique: true
 
-  create_table "items_menus_tables", force: :cascade do |t|
-    t.integer "menu_id"
-    t.integer "item_id"
-  end
-
   create_table "menus", force: :cascade do |t|
     t.string   "meal"
     t.string   "location"

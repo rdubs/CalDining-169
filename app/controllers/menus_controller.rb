@@ -33,6 +33,8 @@ class MenusController < ApplicationController
   # GET /menus/1
   # GET /menus/1.json
   def show
+    @meals = Menu.meals
+    @locations = Menu.locations
     @menu = Menu.where(id: params[:id]).first
     @items = @menu.items.sort_by{ |obj| obj.updated_at }
     #we have access to meal
