@@ -90,15 +90,23 @@ end
 ###################
 
 Given (/^I am signed in as admin$/) do
-  pending
+  visit "/users/sign_in"
+  email = 'ranit@dubey.com'
+  password = 'ranitdubey'
+  fill_in('Email', :with => email)
+  fill_in('Password', :with => password)
+  click_button 'Log in'
+  page.should have_content('Pending')
 end
 
 When (/^I click on "([^"]*)"$/) do |arg1|
-  pending
+  page.should have_content(arg1)
+  click_link(arg1)
 end
 
 Then (/^I should see "([^"]*)" images$/) do |arg1|
-  pending
+  page.should have_content(arg1)
+  
 end
 
 When (/^I mark an image (\d+) as inappropriate$/) do |arg1|
