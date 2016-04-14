@@ -5,9 +5,10 @@ gem 'nokogiri'
 # required for user model
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-oauth2', '~> 1.3.1' 
+gem 'omniauth-oauth2', '~> 1.3.1'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'filepicker-rails'
 # required for parser
 gem 'sidekiq'
 gem 'sidetiq'
