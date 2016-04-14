@@ -9,10 +9,9 @@
   - @pending_images.each do |image|
     .item-container
       .item-image-container
-        =image_tag 'app/user_uploads/' + image.filename.to_s
+        %img{:src => image.filename, :class => 'img_scaled_wh'}
         %span
           =button_to 'Approve', image_approve_path(image.id)
           =button_to 'Disapprove', image_disapprove_path(image.id)
-        %img{:src => 'app/user_uploads/' + image.filename.to_s, :height => 200, :width => 225}
       .item-text-container
         = image.item.name

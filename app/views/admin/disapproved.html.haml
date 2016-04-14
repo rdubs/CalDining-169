@@ -9,7 +9,7 @@
     - @disapproved_images.each do |image|
       .item-container
         .item-image-container
-          %img{:src => '/items/' + 126.to_s + '/first_image', :class => 'img_scaled_wh'}
+          %img{:src => image.filename, :class => 'img_scaled_wh'}
           = button_to 'Approve', image_approve_path(image.id)
         .item-text-container
           = image.item.name
