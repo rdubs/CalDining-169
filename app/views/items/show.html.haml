@@ -7,7 +7,7 @@
         Available for #{@meal} at #{@location}
     .container
         - @images.each do |image|
-            =image_tag 'app/user_uploads/' + image.filename.to_s
+            = filepicker_image_tag image.filename
             - if user_signed_in? && current_user.admin?
                 =button_to 'Disapprove image', image_disapprove_path(image.id)
     - if not @item.nutrition_available.nil?
@@ -31,8 +31,14 @@
                 = link_to location.location, menu_path(location.id)
     %br
     - if user_signed_in?
-        = form_tag({action: :upload_picture}, multipart: true) do
-            = file_field_tag 'picture'
-            = submit_tag 'Upload'
-    %br
+        %div{:id => 'upload_button'} Upload
+
     = link_to 'Back', menu_path(@menu_id)
+
+= javascript_tag do
+    var filepicker_key = "#{ENV['FILEPICKER_KEY']}";
+    var upload_post_url = "#{image_upload_path(@item.id)}";
+    window.onload=initReload();
+    function initReload() {window.location.reload;}
+
+

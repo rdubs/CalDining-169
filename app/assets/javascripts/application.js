@@ -14,3 +14,12 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+$(document).ready(function(){
+    filepicker.setKey(filepicker_key);
+    $('#upload_button').click(function (){
+        filepicker.pick(
+            function(Blob){
+                $.post(upload_post_url, {filename: Blob.url});
+            });
+    });
+});
