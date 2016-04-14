@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :menus
   resources :items
   resources :admin
-  post '/items/:id/upload' => 'items#upload_picture'
+  post '/items/:id/upload' => 'items#upload_picture', as: 'image_upload'
   get '/items/:id/first_image' => 'items#serve_first_image'
   post '/images/:id/approve' => 'images#approve', as: 'image_approve'
   post '/images/:id/disapprove' => 'images#disapprove', as: 'image_disapprove'
