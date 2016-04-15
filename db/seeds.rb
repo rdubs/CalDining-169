@@ -83,6 +83,6 @@ clark_kerr_dinner.items << pizza
 dubey = User.new(email: 'ranit@dubey.com', encrypted_password: '$2a$10$RTKEkAcV6Cd8XogtQupN/OyUaQAcpVOBwA0eoSoMcnXsGqzZ76vii', password: 'ranitdubey', admin: true)
 dubey.save
 
-# dubey2 = User.new(email: 'ranit@dubey.com', password: 'dubeyismynamelatenessismygame', admin: true)
-# dubey2.save
+regular = User.new(email: 'regular@user.com', encrypted_password: '$2a$10$RTKEkAcV6Cd8XogtQupN/OyUaQAcpVOBwA0eoSoMcnXsGqzZ76vii', password: 'regularuser', admin: false)
+regular.save
 

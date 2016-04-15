@@ -106,20 +106,23 @@ end
 
 Then (/^I should see "([^"]*)" images$/) do |arg1|
   page.should have_content(arg1)
-  
+  page.has_css?('div.item-container')
+end
+
+When (/^I remove an image "([^"]*)"$/) do |arg1|
+  #pending
+  #TO BE FINISHED?
+  click_button('Remove')
 end
 
 When (/^I mark an image "([^"]*)" as inappropriate$/) do |arg1|
-  #pending
-  #TO BE FINISHED?
   click_button('Disapprove')
 end
-
-Then (/^I should not see image (\d+)$/) do |arg1|
-  page.should have_no_content(arg1)
+Then (/^I should not see image "([^"]*)"$/) do |arg1|
+  page.should_not have_css('div.item-container')
 end
 
-Then (/^I should see image (\d+)$/) do |arg1|
+Then (/^I should see image "([^"]*)"$/) do |arg1|
   page.should have_content(arg1)
 end
 
@@ -158,6 +161,18 @@ When (/^I upload image "([^"]*)"$/) do |name|
   
 end
 
+Then (/^"([^"]*)" should be in Admin Users$/) do |user|
+  /Admin Users.*#{user}.*Non Admin Users/m.match(page.body).should_not be_nil
+end
 
+Then (/^"([^"]*)" should be in Non Admin Users$/) do |user|
+  /Non Admin Users.*#{user}/m.match(page.body).should_not be_nil
+end
 
+Then (/^I make "([^"]*)" user an admin$/) do |user|
+  click_button('Make admin')
+end
 
+Then (/^I make "([^"]*)" admin a regular user$/) do |user|
+  click_button('Make regular user')
+end
