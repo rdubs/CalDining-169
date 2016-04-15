@@ -109,7 +109,7 @@ Then (/^I should see "([^"]*)" images$/) do |arg1|
   
 end
 
-When (/^I mark an image (\d+) as inappropriate$/) do |arg1|
+When (/^I mark an image "([^"]*)" as inappropriate$/) do |arg1|
   #pending
   #TO BE FINISHED?
   click_button('Disapprove')
@@ -123,7 +123,7 @@ Then (/^I should see image (\d+)$/) do |arg1|
   page.should have_content(arg1)
 end
 
-When (/^I mark an image (\d+) as appropriate$/) do |arg1|
+When (/^I mark an image "([^"]*)" as appropriate$/) do |arg1|
   #pending
   #TO BE FINISHED?
   click_button('Approve')
@@ -148,6 +148,14 @@ end
 
 Then (/^I upload a malformed image$/) do
   pending
+end
+
+When (/^I upload image "([^"]*)"$/) do |name|
+  item = Item.where(name: name).first
+  image = Image.create(filename: 'image' + name, state: 0)
+  item.images << image
+  image.save!
+  
 end
 
 

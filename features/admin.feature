@@ -8,8 +8,13 @@ Background: On the CalDining-169 home page
 
     Given I am on the home page
     And I am signed in as admin
-
-Scenario: Disapprove inappropriate images
+    When I upload image "Pizza"
+    
+Scenario: Disapprove inappropriate images from item view
+    
+    When I click on "Pending"
+    Then I should see "Pending" images
+    
     
     When I choose "Dinner"
     And I choose "Crossroads"
