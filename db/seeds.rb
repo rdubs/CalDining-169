@@ -6,12 +6,12 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-milk = Item.find_or_create_by(name: 'Milk')
+milk = Item.find_or_create_by(name: 'Milk', nutrition_available: true)
 pizza = Item.find_or_create_by(name: 'Pizza')
 bread = Item.find_or_create_by(name: 'Bread')
 coffee = Item.find_or_create_by(name: 'Coffee')
 
-#crossroads meals 
+#crossroads meals
 crossroads_breakfast = Menu.find_or_create_by(location: 'Crossroads', meal: 'Breakfast')
 crossroads_lunch = Menu.find_or_create_by(location: 'Crossroads', meal: 'Lunch/Brunch')
 crossroads_dinner = Menu.find_or_create_by(location: 'Crossroads', meal: 'Dinner')
@@ -85,4 +85,3 @@ dubey.save
 
 # dubey2 = User.new(email: 'ranit@dubey.com', password: 'dubeyismynamelatenessismygame', admin: true)
 # dubey2.save
-
