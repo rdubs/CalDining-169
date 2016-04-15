@@ -4,10 +4,6 @@ class Image < ActiveRecord::Base
 
     def self.get_first_image(item)
         first_image = item.images.where(state: 1).first
-        if first_image
-            return first_image.filename
-        else
-            return 'http://www.ourhometravel.com/images/NoImageAvailable.png'
-        end
+        first_image ? first_image.filename : 'http://www.ourhometravel.com/images/NoImageAvailable.png'
     end
 end
