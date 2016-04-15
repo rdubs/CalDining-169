@@ -20,15 +20,6 @@ class ItemsController < ApplicationController
     redirect_to menus_path
   end
 
-  def serve_first_image
-    item = Item.find(params[:id])
-    image_path = Image.get_first_image(item)
-    send_file(image_path,
-      :disposition => 'inline',
-      :type => 'image/jpeg',
-      :x_sendfile => true)
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
