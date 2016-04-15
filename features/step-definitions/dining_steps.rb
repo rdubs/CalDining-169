@@ -74,14 +74,14 @@ When (/^I sign up with an email and password/) do
   password = 'test1234'
   fill_in('Email', :with => email)
   fill_in('Password', :with => password)
-  fill_in('Password confirmation', :with => password)
+  fill_in('Password Confirmation', :with => password)
   click_button 'Sign up'
 end
 
 And (/I authenticate with "(.*)"/) do |provider|
   puts provider
   visit "/users/auth/#{provider.downcase}"
-end 
+end
 
 Then (/I should see a link to sign in/) do
   page.should have_content('Signin')
@@ -106,31 +106,30 @@ end
 
 Then (/^I should see "([^"]*)" images$/) do |arg1|
   page.should have_content(arg1)
-  
+  page.has_css?('div.item-container')
+end
+
+When (/^I remove an image "([^"]*)"$/) do |arg1|
+  click_button('Remove')
 end
 
 When (/^I mark an image "([^"]*)" as inappropriate$/) do |arg1|
-  #pending
-  #TO BE FINISHED?
   click_button('Disapprove')
 end
-
-Then (/^I should not see image (\d+)$/) do |arg1|
-  page.should have_no_content(arg1)
+Then (/^I should not see image "([^"]*)"$/) do |arg1|
+  page.should_not have_css('div.item-container')
 end
 
-Then (/^I should see image (\d+)$/) do |arg1|
+Then (/^I should see image "([^"]*)"$/) do |arg1|
   page.should have_content(arg1)
 end
 
 When (/^I mark an image "([^"]*)" as appropriate$/) do |arg1|
-  #pending
-  #TO BE FINISHED?
   click_button('Approve')
 end
 
 Then (/^I see a tile layout$/) do
-  pending
+  page.should have_css('div.item-container')
 end
 
 Given (/^I am signed in as user$/) do
@@ -142,22 +141,32 @@ Given (/^I am signed in as user$/) do
   click_button 'Log in'
 end
 
-Then (/^I upload an image$/) do
-  pending
+Then (/^I submit a "([^"]*)" image as a user$/) do |name|
+  id = Item.where(name: name).first.id
+  rack = Capybara.current_session.driver
+  rack.submit :post, image_upload_path(id), nil
 end
 
-Then (/^I upload a malformed image$/) do
-  pending
-end
 
 When (/^I upload image "([^"]*)"$/) do |name|
   item = Item.where(name: name).first
   image = Image.create(filename: 'image' + name, state: 0)
   item.images << image
   image.save!
-  
 end
 
+Then (/^"([^"]*)" should be in Admin Users$/) do |user|
+  /Admin Users.*#{user}.*Non Admin Users/m.match(page.body).should_not be_nil
+end
 
+Then (/^"([^"]*)" should be in Non Admin Users$/) do |user|
+  /Non Admin Users.*#{user}/m.match(page.body).should_not be_nil
+end
 
+Then (/^I make "([^"]*)" user an admin$/) do |user|
+  click_button('Make admin')
+end
 
+Then (/^I make "([^"]*)" admin a regular user$/) do |user|
+  click_button('Make regular user')
+end
