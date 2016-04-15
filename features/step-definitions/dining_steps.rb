@@ -141,13 +141,12 @@ Given (/^I am signed in as user$/) do
   click_button 'Log in'
 end
 
-Then (/^I upload an image$/) do
-  pending
+Then (/^I submit a "([^"]*)" image as a user$/) do |name|
+  id = Item.where(name: name).first.id
+  rack = Capybara.current_session.driver
+  rack.submit :post, image_upload_path(id), nil
 end
 
-Then (/^I upload a malformed image$/) do
-  pending
-end
 
 When (/^I upload image "([^"]*)"$/) do |name|
   item = Item.where(name: name).first

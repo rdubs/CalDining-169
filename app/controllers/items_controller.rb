@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
     item = Item.where(:id => params[:id]).first
     new_img = Image.new(:filename => params[:filename], :state => 0, :item => item, :user => current_user)
     new_img.save
-    redirect_to menus_path
+    flash[:success] = "Image sent for approval!"
   end
 
   private
