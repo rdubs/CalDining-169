@@ -74,14 +74,14 @@ When (/^I sign up with an email and password/) do
   password = 'test1234'
   fill_in('Email', :with => email)
   fill_in('Password', :with => password)
-  fill_in('Password confirmation', :with => password)
+  fill_in('Password Confirmation', :with => password)
   click_button 'Sign up'
 end
 
 And (/I authenticate with "(.*)"/) do |provider|
   puts provider
   visit "/users/auth/#{provider.downcase}"
-end 
+end
 
 Then (/I should see a link to sign in/) do
   page.should have_content('Signin')
@@ -110,8 +110,6 @@ Then (/^I should see "([^"]*)" images$/) do |arg1|
 end
 
 When (/^I remove an image "([^"]*)"$/) do |arg1|
-  #pending
-  #TO BE FINISHED?
   click_button('Remove')
 end
 
@@ -127,13 +125,11 @@ Then (/^I should see image "([^"]*)"$/) do |arg1|
 end
 
 When (/^I mark an image "([^"]*)" as appropriate$/) do |arg1|
-  #pending
-  #TO BE FINISHED?
   click_button('Approve')
 end
 
 Then (/^I see a tile layout$/) do
-  pending
+  page.should have_css('div.item-container')
 end
 
 Given (/^I am signed in as user$/) do
@@ -158,7 +154,6 @@ When (/^I upload image "([^"]*)"$/) do |name|
   image = Image.create(filename: 'image' + name, state: 0)
   item.images << image
   image.save!
-  
 end
 
 Then (/^"([^"]*)" should be in Admin Users$/) do |user|
