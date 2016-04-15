@@ -20,4 +20,3 @@ Scenario: Upload image for food item
     And I press "Submit"
     And I follow "Pizza"
     Then I submit a "Pizza" image as a user
-    Then I should see "Image sent for approval!"

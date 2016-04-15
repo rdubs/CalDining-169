@@ -1,10 +1,6 @@
 .container
     .navbar.clear
         = render 'shared/navbar'
-        
-- flash.each do |key, value|
-    %div{:class => "alert alert-#{key}"}= value
-  
 .container
     .header #{@item.name}
     .container.clear
