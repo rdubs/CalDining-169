@@ -15,8 +15,7 @@ class ItemsController < ApplicationController
 
   def upload_picture
     item = Item.where(:id => params[:id]).first
-    new_img = Image.new(:filename => params[:filename], :state => 0, :item => item, :user => current_user)
-    new_img.save
+    Image.new(:filename => params[:filename], :state => 0, :item => item, :user => current_user).save
     redirect_to :back
   end
 

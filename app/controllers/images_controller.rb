@@ -1,17 +1,16 @@
 class ImagesController < ApplicationController
-
     def approve
-        image = Image.where(id: params[:id]).first
-        image.state = 1
-        image.save!
-        redirect_to :back
+        set_state(1, params[:id])
     end
 
     def disapprove
-        image = Image.where(id: params[:id]).first
-        image.state = 2
+        set_state(2, params[:id])
+    end
+    
+    def set_state(state, id)
+        image = Image.where(id: id).first
+        image.state = state
         image.save!
         redirect_to :back
     end
-
 end
