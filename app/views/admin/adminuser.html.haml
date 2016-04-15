@@ -1,0 +1,17 @@
+.container
+	.navbar.clear
+		= render 'shared/navbar'
+	.header Admin Users
+	- @admin.each do |admin|
+		.admin-item.clear
+			.admin-email
+				= admin.email
+			.admin-button 
+				= button_to 'Make regular user', update_path(admin.id), method: :put
+	.header Non Admin Users
+	- @nonadmin.each do |nonadmin|
+		.admin-item.clear
+			.admin-email
+				= nonadmin.email
+			.admin-button 
+				= button_to 'Make admin', update_path(nonadmin.id), method: :put

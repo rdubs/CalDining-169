@@ -1,11 +1,15 @@
 .container
   .navbar.clear
     = render 'shared/navbar'
+.container.clear
   .header #{@menu.meal} at #{@menu.location}
-.container-big.clear  
+  = render 'shared/selection'
+
+.container-big.masonry-container.clear
   - @items.each do |item|
     %a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
       .item-container
         .item-image-container
+          %img{:src => Image.get_first_image(item), :class => 'img_scaled_wh'}
         .item-text-container
           = item.name

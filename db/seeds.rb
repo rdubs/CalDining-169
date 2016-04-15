@@ -78,3 +78,11 @@ clark_kerr_lunch.items << coffee
 clark_kerr_dinner.items << bread
 clark_kerr_dinner.items << pizza
 
+## CREATING TEST ADMIN USER
+#password: ranitdubey
+dubey = User.new(email: 'ranit@dubey.com', encrypted_password: '$2a$10$RTKEkAcV6Cd8XogtQupN/OyUaQAcpVOBwA0eoSoMcnXsGqzZ76vii', password: 'ranitdubey', admin: true)
+dubey.save
+
+# dubey2 = User.new(email: 'ranit@dubey.com', password: 'dubeyismynamelatenessismygame', admin: true)
+# dubey2.save
+

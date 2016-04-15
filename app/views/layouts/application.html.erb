@@ -5,7 +5,17 @@
   <link href='https://fonts.googleapis.com/css?family=Hind:400,300,600' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= filepicker_js_include_tag %>
   <%= csrf_meta_tags %>
+  <script>
+      $(document).ready(function(){
+      	var $container = $('.masonry-container');
+		// initialize Masonry after all images have loaded  
+		$container.imagesLoaded( function() {
+		    $container.masonry({columnWidth: 0, itemSelector: '.item-container'});
+		});
+      })
+  </script>
 </head>
 <body>
 

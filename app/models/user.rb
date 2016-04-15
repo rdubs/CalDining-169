@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
-         
+  has_many :images
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(:email => data["email"]).first

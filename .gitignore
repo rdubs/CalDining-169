@@ -18,3 +18,5 @@
 
 # Ignore coverage files.
 /coverage
+
+/app/user_uploads
