@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe MenusController, type: :controller do
   describe "GET #index" do
     before do
-      get :index, :params => {:meal => "Dinner", :location => "Cafe 3"}
+      get :index
     end
 
     it "responds successfully with an HTTP 200 status code" do
@@ -23,6 +23,14 @@ RSpec.describe MenusController, type: :controller do
     it "should have the current menu location" do
       expect(assigns(:selected_meal)).to eq nil
       expect(assigns(:selected_location)).to eq nil
+    end
+
+    it "should update the selected meal and location" do
+      get :index, :meal => "Dinner", :location => "Crossroads"
+      expect(controller.params[:meal]).to eq "Dinner"
+      expect(controller.params[:location]).to eq"Crossroads"
+      expect(assigns(:selected_meal)).to eq "Dinner"
+      expect(assigns(:selected_location)).to eq "Crossroads"
     end
   end
 
