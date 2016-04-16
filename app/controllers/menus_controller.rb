@@ -9,21 +9,13 @@ class MenusController < ApplicationController
     @meals = Menu.meals
     @locations = Menu.locations
     @menus = Menu.all
-    params[:meal] ? @selected_meal = params[:meal] : @selected_meal = ""
-    params[:location] ? @selected_location = params[:location] : @selected_location = ""
-    #session.clear
-    # if params[:meal] && params[:location]
-    #   #session[:selected_meal] = params[:meal]
-    #   #session[:selected_location] = params[:location]
-    #   @selected_meal = params[:meal]
-    #   @selected_location = params[:location]
-    # #elsif session[:selected_meal] && session[:selected_location]
-    #   #@selected_meal = session[:selected_meal]
-    #   #@selected_location = session[:selected_location]
-    # end
+    params[:meal] ? @selected_meal = params[:meal] : @selected_meal = session[:selected_meal]
+    params[:location] ? @selected_location = params[:location] : @selected_location = session[:selected_location]
 
-    if @selected_meal and @selected_location
-      menu = Menu.where(:meal => @selected_meal, :location => @selected_location).first
+    if params[:meal] and params[:location]
+      session[:selected_meal] = params[:meal]
+      session[:selected_location] = params[:location]
+      menu = Menu.where(:meal => params[:meal], :location => params[:location]).first
       if not menu.nil?
         redirect_to menu_path(menu.id) and return
       end
@@ -36,8 +28,9 @@ class MenusController < ApplicationController
     @meals = Menu.meals
     @locations = Menu.locations
     @menu = Menu.where(id: params[:id]).first
+    @selected_meal = @menu.meal
+    @selected_location = @menu.location
     @items = @menu.items.sort_by{ |obj| obj.updated_at }
-    #we have access to meal
   end
 
   private
