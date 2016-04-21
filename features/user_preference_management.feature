@@ -2,7 +2,7 @@ Feature: Users should be able to manage which food items they prefer
 
   As a dining hall visitor
   I want to select my food preferences 
-  So that I can be notified when it is available at a dining hall
+  So that I am aware when it is available at a dining hall
 
 Background: Add Pizza to my preferences
 
