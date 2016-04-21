@@ -170,3 +170,23 @@ end
 Then (/^I make "([^"]*)" admin a regular user$/) do |user|
   click_button('Make regular user')
 end
+
+Then(/^I add "([^"]*)" to my preferences$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see "([^"]*)" in my preference list$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When(/^I remove "([^"]*)" from my preferences$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should not see "([^"]*)" in my preference list$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then(/^I should see "([^"]*)" in my preference box$/) do |arg1|
+  pending # Write code here that turns the phrase above into concrete actions
+end
