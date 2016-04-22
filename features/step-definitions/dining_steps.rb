@@ -190,3 +190,7 @@ end
 Then(/^I should see "([^"]*)" in my preference box$/) do |arg1|
   pending
 end
+
+Then(/^I should not see "([^"]*)" in my preference box$/) do |arg1|
+  pending
+end
