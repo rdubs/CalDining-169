@@ -11,8 +11,8 @@ body, html {
 	font-size: 14px;
 	font-family: Hind, sans-serif;
 	text-rendering: optimizeLegibility;
-	background-color: #FDFDFD;
-	color: #333338;
+	background-color: #fafafa;
+	color: rgba(0,0,0,.8);
 	padding-bottom: 20px;
 }
 
@@ -30,7 +30,7 @@ body, html {
 }
 
 .pace .pace-progress {
-  background: #29d;
+  background: #02b875;
   position: fixed;
   z-index: 2000;
   top: 0;

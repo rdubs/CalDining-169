@@ -1,16 +1,13 @@
-.container
-  .navbar.clear
-    = render 'shared/navbar'
-  .container.login-container
-    .header Sign up
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      = devise_error_messages!
-      .field
-        = f.email_field :email, placeholder: 'Email', autofocus: true, class: 'login-input'
-      .field
-        = f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'login-input'
-      .field
-        = f.password_field :password_confirmation, placeholder: 'Password Confirmation', autocomplete: "off",  class: 'login-input'
-      .actions
-        = f.submit "Sign up", class: 'login-action'
-    = render "devise/shared/links"
+.container.login-container
+  .header Sign up
+  = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+    = devise_error_messages!
+    .field
+      = f.email_field :email, placeholder: 'Email', autofocus: true, class: 'login-input'
+    .field
+      = f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'login-input'
+    .field
+      = f.password_field :password_confirmation, placeholder: 'Password Confirmation', autocomplete: "off",  class: 'login-input'
+    .actions
+      = f.submit "Sign up", class: 'login-action'
+  = render "devise/shared/links"

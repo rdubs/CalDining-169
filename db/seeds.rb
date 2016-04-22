@@ -73,6 +73,8 @@ foothill_dinner.items << milk
 
 clark_kerr_breakfast.items << milk
 clark_kerr_breakfast.items << coffee
+clark_kerr_breakfast.items << pizza
+clark_kerr_breakfast.items << bread
 clark_kerr_lunch.items << pizza
 clark_kerr_lunch.items << coffee
 clark_kerr_dinner.items << bread

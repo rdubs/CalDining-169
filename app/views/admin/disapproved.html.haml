@@ -1,16 +1,15 @@
 .container
-  .navbar.clear
-    = render 'shared/navbar'
   .header Disapproved Images
-.container-big.clear
+.items-container.clear
   - if @disapproved_images.empty? 
     %div No disapproved images available.
   - else
     - @disapproved_images.each do |image|
       .item-container
         .item-image-container
-          %img{:src => image.filename, :class => 'img_scaled_wh'}
-          = button_to 'Approve', image_approve_path(image.id)
+          = image_tag image.filename, {:class => 'img_scaled_wh'}
         .item-text-container
-          = image.item.name
-
+          .item-text
+            .item-icons-container.clear
+              = link_to image_tag('check.png', :class => 'admin-icons left'), image_approve_path(image.id), :method => :post 
+            = image.item.name

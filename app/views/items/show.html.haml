@@ -1,66 +1,70 @@
 .container
-    .navbar.clear
-        = render 'shared/navbar'
-.container
-    .header #{@item.name}
-    .container.clear
-        .availability.left
-            Available for #{@meal} at #{@location}
-        .upload-container.right
-            - if user_signed_in?
-                #upload-button
-                    Add Photo
+  .header #{@item.name}
+  .container.clear
+    .availability.left
+      Available for #{@meal} at #{@location}
+    .upload-container.right
+      - if user_signed_in?
+        #upload-button.clear
+          .upload-icon.left
+            = image_tag 'upload.png', {:class => 'img_scaled_wh'}
+          .upload-text.left
+            Add Photo
 - if not @images.empty?
-    .container-big.clear
-        - @images.each do |image|
-            .item-container
-                .item-image-container
-                    = image_tag image.filename, class: 'img_scaled_wh'
-                - if user_signed_in? && current_user.admin?
-                    = button_to 'Remove', image_disapprove_path(image.id), {class: 'remove-button'}
+  .items-container.clear
+    - @images.each do |image|
+      .item-container
+        .item-image-container
+          = image_tag image.filename, class: 'img_scaled_wh'
+        - if user_signed_in? && current_user.admin?
+          .item-text-container
+            = link_to image_tag('cancel.png', :class => 'admin-icons right'), image_disapprove_path(image.id), :method => :post 
 .container
-    .nutrition-container
-        - if not @item.nutrition_available.nil?
-            .subheader Nutrition Facts
-            .container.clear
-                .half
-                    %ul
-                        %li
-                            Calories:
-                            %span #{@item.calories}
-                        %li
-                            Total Fat:
-                            %span #{@item.total_fat}
-                        %li
-                            Cholesterol:
-                            %span #{@item.cholesterol}
-                        %li
-                            Sodium:
-                            %span #{@item.sodium}
-                .half
-                    %ul
-                        %li
-                            Dietary Fiber:
-                            %span #{@item.dietary_fiber}
-                        - if not @item.vitamin_c_percent.nil?
-                            %li
-                            Vitamin C:
-                            %span #{@item.vitamin_c_percent + '%'}
-                        %li
-                            Allergens:
-                            %span #{@item.allergens}
-            %hr
-            .ingredients-container
-                .subheader#ingredients-button Ingredients
-                .ingredients-text.hidden #{@item.ingredients}
-        - else
-            %p No nutrition information available
-        - if not @other_locations.empty?
-            %p Also available for #{@meal} at:
-            - @other_locations.each do |location|
-                %div
-                    = link_to location.location, menu_path(location.id)
+  .nutrition-container
+    - if not @item.nutrition_available.nil?
+      .subheader Nutrition Facts
+      .container.clear
+        .half
+          %ul
+            %li
+              Calories:
+              %span #{@item.calories}
+            %li
+              Total Fat:
+              %span #{@item.total_fat}
+            %li
+              Cholesterol:
+              %span #{@item.cholesterol}
+            %li
+              Sodium:
+              %span #{@item.sodium}
+        .half
+          %ul
+            %li
+              Dietary Fiber:
+              %span #{@item.dietary_fiber}
+            - if not @item.vitamin_c_percent.nil?
+              %li
+                Vitamin C:
+                %span #{@item.vitamin_c_percent + '%'}
+            %li
+              Allergens:
+              %span #{@item.allergens}
+      %hr
+      .ingredients-container
+        .subheader#ingredients-button Ingredients
+        .ingredients-text.hidden #{@item.ingredients}
+    - else
+      .subheader No nutrition information available
+    %hr
+    - if not @other_locations.empty?
+      .other-location-container.clear
+        .subtitle.pretext.left Also available for #{@meal} at
+        .other-location-item-container.left.clear
+          - @other_locations.each do |location|
+            .other-location-item.left
+              = link_to location.location, menu_path(location.id)
 
 = javascript_tag do
-    var filepicker_key = "#{ENV['FILEPICKER_KEY']}";
-    var upload_post_url = "#{image_upload_path(@item.id)}";
+  var filepicker_key = "#{ENV['FILEPICKER_KEY']}";
+  var upload_post_url = "#{image_upload_path(@item.id)}";

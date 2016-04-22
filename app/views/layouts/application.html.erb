@@ -8,16 +8,23 @@
   <%= filepicker_js_include_tag %>
   <%= csrf_meta_tags %>
   <script>
-      $(document).ready(function(){
-      	var $container = $('.masonry-container');
+      $(document).on('ready page:load', function(){
+      	var $container = $('.items-container');
 		// initialize Masonry after all images have loaded  
 		$container.imagesLoaded( function() {
-		    $container.masonry({columnWidth: 0, itemSelector: '.item-container'});
+		    $container.masonry({
+          columnWidth: 0,
+          itemSelector: '.item-container',
+          gutter: 10
+        });
 		});
       })
   </script>
 </head>
 <body>
+  <div class = "navbar clear">
+    <%= render "shared/navbar" %>
+  </div>
 
 <%= yield %>
 

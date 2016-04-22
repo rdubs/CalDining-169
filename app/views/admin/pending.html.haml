@@ -1,17 +1,16 @@
 .container
-  .navbar.clear
-    = render 'shared/navbar'
   .header Pending Images
-.container-big.clear
+.items-container.clear
   - if @pending_images.empty? 
     .notice No pending images. You're all caught up! 
   - else
   - @pending_images.each do |image|
     .item-container
       .item-image-container
-        %img{:src => image.filename, :class => 'img_scaled_wh'}
-        %span
-          =button_to 'Approve', image_approve_path(image.id)
-          =button_to 'Disapprove', image_disapprove_path(image.id)
+        = image_tag image.filename, {:class => 'img_scaled_wh'}
       .item-text-container
-        = image.item.name
+        .item-icons-container.clear
+          = link_to image_tag('check.png', :class => 'admin-icons left'), image_approve_path(image.id), :method => :post 
+          = link_to image_tag('cancel.png', :class => 'admin-icons right'), image_disapprove_path(image.id), :method => :post 
+        .item-text
+          = image.item.name

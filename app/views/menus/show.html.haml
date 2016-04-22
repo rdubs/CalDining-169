@@ -1,11 +1,8 @@
-.container
-  .navbar.clear
-    = render 'shared/navbar'
 .container.clear
   .header #{@menu.meal} at #{@menu.location}
   = render 'shared/selection'
 
-.container-big.masonry-container.clear
+.items-container.clear
   - @items.each do |item|
     %a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
       .item-container

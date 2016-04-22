@@ -1,21 +1,27 @@
-.container
-  .home-item
-    = link_to 'Home', menus_path
-    - if user_signed_in? && current_user.admin?
-      .home-item
-      = link_to 'Pending', pending_path
-      .home-item
-      = link_to 'Disapproved', disapproved_path
-      .home-item
-      = link_to 'Adminusers', adminuser_path
-  - if user_signed_in?
-    .navbar-item
-      = link_to 'Sign out', destroy_user_session_path, method: :delete
-    .navbar-item
-      = link_to 'My info', edit_user_registration_path
-    .navbar-item
-      = current_user.email
-  - else
-    .navbar-item
-      = link_to "Signin", new_user_session_path
-      = link_to "Sign up", new_user_registration_path
+.navbar-container.clear
+  .container
+    .navbar-content-container.left.clear
+      #logo.left
+        = link_to image_tag('logo.png', class: 'img-scaled-wh'), menus_path
+      - if user_signed_in? && current_user.admin?
+        .navbar-item.left
+          = link_to 'Pending', pending_path
+        .navbar-item.left
+          = link_to 'Disapproved', disapproved_path
+        .navbar-item.left
+          = link_to 'Adminusers', adminuser_path
+    .navbar-content-container.right
+      - if user_signed_in?
+        .dropdown
+          .navbar-item
+            = current_user.email
+          .dropdown-content
+            = link_to 'My info', edit_user_registration_path, {:class => 'navbar-item'} 
+            = link_to'Sign out', destroy_user_session_path, {:method => :delete, :class => 'navbar-item'}
+
+      - else
+        .right.clear
+          .navbar-item.left
+            = link_to "Signin", new_user_session_path
+          .navbar-item.left
+            = link_to "Sign up", new_user_registration_path
