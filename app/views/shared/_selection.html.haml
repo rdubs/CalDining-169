@@ -7,4 +7,4 @@
     - @meals.each do |meal|
       = radio_button_tag :meal, "#{meal}", @selected_meal == meal, :id => "#{meal.tr('/','_')}", :class => 'radio'
       = label_tag meal, meal.titleize, class: 'radio'
-  = submit_tag 'Submit', id: "menus_submit"
+  = submit_tag 'Submit', id: "menus-submit", class: 'radio'

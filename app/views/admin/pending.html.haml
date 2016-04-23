@@ -1,17 +1,22 @@
 .container
-  .navbar.clear
-    = render 'shared/navbar'
   .header Pending Images
-.container-big.clear
+.items-container.clear
   - if @pending_images.empty? 
     .notice No pending images. You're all caught up! 
   - else
   - @pending_images.each do |image|
     .item-container
+      .item-icons-container.clear
+        = link_to image_approve_path(image.id), :method => :post  do
+          .status-container.approve-container.left
+            Approve
+            %i.fa.fa-check{"aria-hidden" => "true"}
+        = link_to image_disapprove_path(image.id), :method => :post do
+          .status-container.disapprove-container.right
+            Disapprove
+            %i.fa.fa-times{"aria-hidden" => "true"} 
       .item-image-container
-        %img{:src => image.filename, :class => 'img_scaled_wh'}
-        %span
-          =button_to 'Approve', image_approve_path(image.id)
-          =button_to 'Disapprove', image_disapprove_path(image.id)
+        = image_tag image.filename, {:class => 'img_scaled_wh'}
       .item-text-container
-        = image.item.name
+        .item-text
+          = image.item.name
