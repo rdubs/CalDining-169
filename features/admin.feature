@@ -70,7 +70,7 @@ Scenario: Approve regular user as admin
     
     When I click on "Adminusers"
     Then "ranit@dubey.com" should be in Admin Users
-    Then "regular@user.com" should be in Non Admin Users
+    Then "regular@user.com" should be in Regular Users
     When I make "regular@user.com" user an admin
     Then "ranit@dubey.com" should be in Admin Users
     Then "regular@user.com" should be in Admin Users
@@ -79,7 +79,7 @@ Scenario: Make admin user a regular user
     
     When I click on "Adminusers"
     Then "ranit@dubey.com" should be in Admin Users
-    Then "regular@user.com" should be in Non Admin Users
+    Then "regular@user.com" should be in Regular Users
     When I make "ranit@dubey.com" admin a regular user
     Then I should not see "Adminusers"
     

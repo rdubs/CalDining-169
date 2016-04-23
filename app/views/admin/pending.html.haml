@@ -6,11 +6,17 @@
   - else
   - @pending_images.each do |image|
     .item-container
+      .item-icons-container.clear
+        = link_to image_approve_path(image.id), :method => :post  do
+          .status-container.approve-container.left
+            Approve
+            %i.fa.fa-check{"aria-hidden" => "true"}
+        = link_to image_disapprove_path(image.id), :method => :post do
+          .status-container.disapprove-container.right
+            Disapprove
+            %i.fa.fa-times{"aria-hidden" => "true"} 
       .item-image-container
         = image_tag image.filename, {:class => 'img_scaled_wh'}
       .item-text-container
-        .item-icons-container.clear
-          = link_to image_tag('check.png', :class => 'admin-icons left'), image_approve_path(image.id), :method => :post 
-          = link_to image_tag('cancel.png', :class => 'admin-icons right'), image_disapprove_path(image.id), :method => :post 
         .item-text
           = image.item.name

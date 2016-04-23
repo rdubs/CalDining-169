@@ -1,24 +1,20 @@
 .admin-email {
-	float: left;
-	line-height: 35px;
+    float: left;
+    line-height: 35px;
 }
 
 .admin-item {
-	font-size: 16px;
-	padding: 4px;
+    font-size: 16px;
+    padding: 4px;
 }
 
 .admin-button {
-	float: right;
+    float: right;
 }
 
 .admin-icons {
-	width: 30px;
-	height: 30px;
-}
-
-.item-icons-container {
-	margin-bottom: 10px;
+    width: 30px;
+    height: 30px;
 }
 
 .admin-btn {
@@ -34,11 +30,11 @@
 }
 
 .admin-btn:hover{
-	color: rgba(0,0,0,0.8);
+    color: rgba(0,0,0,0.8);
 }
 
 .admin-hr {
-	margin-top: 8px;
+    margin-top: 8px;
     margin-bottom: 8px;
     max-width: 960px;
     border: 0;
@@ -46,5 +42,30 @@
 }
 
 .regular-section {
-	margin-top: 30px;
+    margin-top: 30px;
+}
+
+.approve-container {
+    background: #02b875;
+}
+
+.fa-check, .fa-times {
+    margin-left: 4px;
+}
+
+.status-container {
+    width: 50%;
+    font-weight: 600;
+    box-sizing: border-box;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+}
+
+.disapprove-container {
+    background: #CC5454; 
+}
+
+#full {
+    width: 100%;
 }

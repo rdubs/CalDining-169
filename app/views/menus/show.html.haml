@@ -1,12 +1,20 @@
 .container.clear
-  .header #{@menu.meal} at #{@menu.location}
-  = render 'shared/selection'
+	.header #{@menu.meal} at #{@menu.location}
+	= render 'shared/selection'
 
 .items-container.clear
-  - @items.each do |item|
-    %a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
-      .item-container
-        .item-image-container
-          %img{:src => Image.get_first_image(item), :class => 'img_scaled_wh'}
-        .item-text-container
-          = item.name
+	- @items.each do |item|
+		%a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
+			.item-container
+				- if Image.get_first_image(item)
+					.item-image-container
+						%img{:src => Image.get_first_image(item), :class => 'img_scaled_wh'}
+				- else
+					.no-image-container
+						.table
+							.table-cell
+								%i.fa.fa-image{"aria-hidden" => "true"}
+								.no-image-caption
+									Upload an image
+				.item-text-container
+					= item.name

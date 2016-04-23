@@ -6,51 +6,54 @@
     .upload-container.right
       - if user_signed_in?
         #upload-button.clear
-          .upload-icon.left
-            = image_tag 'upload.png', {:class => 'img_scaled_wh'}
           .upload-text.left
+            %i.fa.fa-camera{"aria-hidden" => "true"}
             Add Photo
 - if not @images.empty?
   .items-container.clear
     - @images.each do |image|
       .item-container
+        - if user_signed_in? && current_user.admin?
+          .item-icons-container.clear
+            = link_to image_disapprove_path(image.id), :method => :post do
+              .status-container.disapprove-container#full
+                Remove
+                %i.fa.fa-times{"aria-hidden" => "true"}
         .item-image-container
           = image_tag image.filename, class: 'img_scaled_wh'
-        - if user_signed_in? && current_user.admin?
-          .item-text-container
-            = link_to image_tag('cancel.png', :class => 'admin-icons right'), image_disapprove_path(image.id), :method => :post 
 .container
   .nutrition-container
     - if not @item.nutrition_available.nil?
-      .subheader Nutrition Facts
-      .container.clear
-        .half
-          %ul
-            %li
-              Calories:
-              %span #{@item.calories}
-            %li
-              Total Fat:
-              %span #{@item.total_fat}
-            %li
-              Cholesterol:
-              %span #{@item.cholesterol}
-            %li
-              Sodium:
-              %span #{@item.sodium}
-        .half
-          %ul
-            %li
-              Dietary Fiber:
-              %span #{@item.dietary_fiber}
-            - if not @item.vitamin_c_percent.nil?
+      .nutrition-facts-container
+        .subheader Nutrition Facts
+        .container.clear
+          .half
+            %ul
               %li
-                Vitamin C:
-                %span #{@item.vitamin_c_percent + '%'}
-            %li
-              Allergens:
-              %span #{@item.allergens}
-      %hr
+                Calories:
+                %span #{@item.calories}
+              %li
+                Total Fat:
+                %span #{@item.total_fat}
+              %li
+                Cholesterol:
+                %span #{@item.cholesterol}
+              %li
+                Sodium:
+                %span #{@item.sodium}
+          .half
+            %ul
+              %li
+                Dietary Fiber:
+                %span #{@item.dietary_fiber}
+              - if not @item.vitamin_c_percent.nil?
+                %li
+                  Vitamin C:
+                  %span #{@item.vitamin_c_percent + '%'}
+              %li
+                Allergens:
+                %span #{@item.allergens}
+        %hr
       .ingredients-container
         .subheader#ingredients-button Ingredients
         .ingredients-text.hidden #{@item.ingredients}

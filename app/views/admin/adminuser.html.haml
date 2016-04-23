@@ -1,5 +1,5 @@
 .container
-	.subheader Admin Users (#{@admin.count})
+	.subheader Admin Users
 	- @admin.each do |admin|
 		.admin-item.clear
 			.admin-email
@@ -8,7 +8,7 @@
 				= button_to 'Make regular user', update_path(admin.id), {:method => :put, :class => 'admin-btn'}
 		.admin-hr
 	.regular-section
-		.subheader Regular Users (#{@nonadmin.count}) 
+		.subheader Regular Users
 		- @nonadmin.each do |nonadmin|
 			.admin-item.clear
 				.admin-email

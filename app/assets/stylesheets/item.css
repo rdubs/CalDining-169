@@ -68,6 +68,9 @@
     color: #fff;
     font-weight: 600;
     cursor: pointer;
+    -webkit-transition: linear 0.1s;
+    -moz-transition: linear 0.1s;
+    transition: linear 0.1s;
 }
 
 .upload-icon {
@@ -75,8 +78,6 @@
 	height: 25px;
 }
 .upload-text {
-	line-height: 25px;
-	margin-left: 5px;
 }
 
 .availability {

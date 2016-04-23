@@ -2,7 +2,8 @@
   .container
     .navbar-content-container.left.clear
       #logo.left
-        = link_to image_tag('logo.png', class: 'img-scaled-wh'), menus_path
+        %a{:href => menus_path}
+          %i.fa.fa-cutlery{"aria-hidden" => "true"}
       - if user_signed_in? && current_user.admin?
         .navbar-item.left
           = link_to 'Pending', pending_path

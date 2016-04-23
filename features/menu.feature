@@ -28,7 +28,7 @@ Scenario: Check items at location and meal time
     And I should not see "Coffee"
     When I follow "Milk"
     Then I should see "Milk"
-    And I should see "Also available for Breakfast at: Crossroads"
+    And I should see "Also available for Breakfast at Crossroads"
     When I go to the "Foothill Breakfast" menu page
     When I follow "Bread"
-    Then I should not see "Also available for Breakfast at:"
+    Then I should not see "Also available for Breakfast at"

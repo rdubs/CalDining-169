@@ -4,6 +4,6 @@ class Image < ActiveRecord::Base
 
     def self.get_first_image(item)
         first_image = item.images.where(state: 1).first
-        first_image ? first_image.filename : 'http://www.ourhometravel.com/images/NoImageAvailable.png'
+        first_image ? first_image.filename : nil
     end
 end
