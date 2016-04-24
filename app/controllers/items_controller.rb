@@ -18,7 +18,29 @@ class ItemsController < ApplicationController
     Image.new(:filename => params[:filename], :state => 0, :item => item, :user => current_user).save
     redirect_to :back
   end
-
+  
+  def add_to_preferences
+    user = User.where(:id => params[:user_id]).first
+    item = Item.where(:id => params[:item_id]).first
+    if not user.items.include? (item)
+      user.items << item
+      user.save!
+      user.reload
+      item.reload
+    end
+  end
+  
+  def remove_from_preferences
+    user = User.where(:id => params[:user_id]).first
+    item = Item.where(:id => params[:item_id]).first
+    if user.items.include? (item)
+      user.items.delete(item)
+      user.save!
+      user.reload
+      item.reload
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
