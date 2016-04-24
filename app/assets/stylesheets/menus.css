@@ -23,16 +23,20 @@
     padding: 20px 0;
 }
 
-.item-container {
-    width: calc(25% - 10px);
-    padding: 10px;
-    /* padding-bottom: 15px; */
-    box-sizing: border-box;
-    float: left;
-    position: relative;
+.item-content-container {
     box-shadow: 0 1px 4px rgba(0,0,0,.04);
     background: #fff;
     border: 1px solid rgba(0,0,0,.09);
+    padding: 10px;
+}
+
+.item-container {
+    width: calc(25% - 10px);
+    padding-bottom: 15px;
+    box-sizing: border-box;
+    float: left;
+    position: relative;
+
 }
 
 hr {
