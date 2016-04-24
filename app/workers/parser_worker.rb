@@ -5,11 +5,9 @@ require 'sidekiq'
 
 class ParserWorker
   include Sidekiq::Worker
-  include Sidetiq::Schedulable
   
-  recurrence backfill: true do
-    daily.hour_of_day(7)
-  end
+  @@vegan_color = "#800040"
+  @@vegetarian_color = "#008000"
   
   def perform
     @base_url = "http://services.housing.berkeley.edu/FoodPro/dining/static/"
@@ -60,14 +58,20 @@ class ParserWorker
     items = []
   
     submenu_data.css("a").each do |item|
-      item_url = @base_url + item.attributes["href"].value
-      item_doc = Nokogiri::HTML(open(item_url))
-      
-      # NOTE: currently, we always update existing item records; maybe allow skipping in future?
       curr_item = Item.find_or_create_by(name: item.text)
       next if curr_item.menus.include?(submenu_record)
       curr_item.menus << submenu_record
-    
+      
+      color_val = item.children.first.attributes["color"].value
+      if color_val == @@vegan_color
+        curr_item.vegan = true
+      elsif color_val == @@vegetarian_color
+        curr_item.vegetarian = true
+      end
+
+      item_url = @base_url + item.attributes["href"].value
+      item_doc = Nokogiri::HTML(open(item_url))
+      
       # Check nutrition availability. If unavailable, add to items and skip to next iter.
       if item_doc.css("font").select{|candidate| candidate.css("i").text =~ /^Nutritional Information is not available/}.empty?
         curr_item.nutrition_available = true
