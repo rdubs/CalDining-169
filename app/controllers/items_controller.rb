@@ -23,10 +23,15 @@ class ItemsController < ApplicationController
     user = current_user
     item = Item.where(:id => params[:id]).first
     if not user.items.include? (item)
-      user.items << item
-      user.save!
-      user.reload
-      item.reload
+      if user.items.length < 10
+        user.items << item
+        user.save!
+        user.reload
+        item.reload
+      else
+        # some flash message
+        flash[:error] = "You can have only 10 favorites"
+      end
     end
     redirect_to :back
   end
