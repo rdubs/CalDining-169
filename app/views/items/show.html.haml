@@ -9,6 +9,12 @@
           .upload-text.left
             %i.fa.fa-camera{"aria-hidden" => "true"}
             Add an image
+.container
+  - if user_signed_in?
+    - if !current_user.items.include? (@item)
+      = link_to 'Add', add_to_preferences_path(@item.id), :method => :post
+    - else
+      = link_to 'Remove', remove_from_preferences_path(@item.id), :method => :post
 - if not @images.empty?
   .items-container.clear
     - @images.each do |image|

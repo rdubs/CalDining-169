@@ -6,6 +6,11 @@
 	- @items.each do |item|
 		%a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
 			.item-container
+				- if user_signed_in?
+					- if !current_user.items.include? (item)
+						= link_to 'Add', add_to_preferences_path(item.id), :method => :post
+					- else
+						= link_to 'Remove', remove_from_preferences_path(item.id), :method => :post
 				- if Image.get_first_image(item)
 					.item-image-container
 						%img{:src => Image.get_first_image(item), :class => 'img_scaled_wh'}
