@@ -29,7 +29,7 @@
           = image_tag image.filename, class: 'img_scaled_wh'
 .container
   .nutrition-container
-    - if not @item.nutrition_available.nil?
+    - if @item.nutrition_available
       .nutrition-facts-container
         .subheader Nutrition Facts
         .container.clear
