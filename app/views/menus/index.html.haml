@@ -1,3 +1,7 @@
 .container.clear
   .header Select a meal and location
   = render 'shared/selection'
+  - @current_items.each do |item|
+    - item.menus.each do |menu|
+      %div
+        = item.name + ' at ' + menu.location + ' for ' + menu.meal
