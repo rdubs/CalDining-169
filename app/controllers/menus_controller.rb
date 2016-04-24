@@ -11,7 +11,14 @@ class MenusController < ApplicationController
     @menus = Menu.all
     params[:meal] ? @selected_meal = params[:meal] : @selected_meal = session[:selected_meal]
     params[:location] ? @selected_location = params[:location] : @selected_location = session[:selected_location]
-
+    @current_items = []
+    if current_user
+      current_user.items.each do |item|
+        if item.menus.length > 0
+          @current_items.push(item)
+        end
+      end
+    end
     if params[:meal] and params[:location]
       session[:selected_meal] = params[:meal]
       session[:selected_location] = params[:location]
