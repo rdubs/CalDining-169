@@ -3,18 +3,27 @@
 	= render 'shared/selection'
 
 .items-container.clear
-	- @items.each do |item|
-		%a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
+	- if @items.empty?
+		= 'Closed'
+	- else
+		- @items.each do |item|
 			.item-container
-				- if Image.get_first_image(item)
-					.item-image-container
-						%img{:src => Image.get_first_image(item), :class => 'img_scaled_wh'}
-				- else
-					.no-image-container
-						.table
-							.table-cell
-								%i.fa.fa-image{"aria-hidden" => "true"}
-								.no-image-caption
-									Add an image
-				.item-text-container
-					= item.name
+				- if user_signed_in?
+					- if !current_user.items.include? (item)
+						= button_to 'Add', add_to_preferences_path(item.id), :method => :post
+					- else
+						= button_to 'Remove', remove_from_preferences_path(item.id), :method => :post
+				%a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
+					.item-content-container
+						- if Image.get_first_image(item)
+							.item-image-container
+								%img{:src => Image.get_first_image(item), :class => 'img_scaled_wh'}
+						- else
+							.no-image-container
+								.table
+									.table-cell
+										%i.fa.fa-image{"aria-hidden" => "true"}
+										.no-image-caption
+											Add an image
+						.item-text-container
+							= item.name

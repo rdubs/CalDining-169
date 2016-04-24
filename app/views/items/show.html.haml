@@ -9,10 +9,16 @@
           .upload-text.left
             %i.fa.fa-camera{"aria-hidden" => "true"}
             Add an image
+.container
+  - if user_signed_in?
+    - if !current_user.items.include? (@item)
+      = link_to 'Add', add_to_preferences_path(@item.id), :method => :post
+    - else
+      = link_to 'Remove', remove_from_preferences_path(@item.id), :method => :post
 - if not @images.empty?
   .items-container.clear
     - @images.each do |image|
-      .item-container
+      .item-container.item-content-container
         - if user_signed_in? && current_user.admin?
           .item-icons-container.clear
             = link_to image_disapprove_path(image.id), :method => :post do
@@ -23,7 +29,7 @@
           = image_tag image.filename, class: 'img_scaled_wh'
 .container
   .nutrition-container
-    - if not @item.nutrition_available.nil?
+    - if @item.nutrition_available
       .nutrition-facts-container
         .subheader Nutrition Facts
         .container.clear

@@ -11,7 +11,12 @@ class MenusController < ApplicationController
     @menus = Menu.all
     params[:meal] ? @selected_meal = params[:meal] : @selected_meal = session[:selected_meal]
     params[:location] ? @selected_location = params[:location] : @selected_location = session[:selected_location]
-
+    @current_items = []
+    if current_user
+      @menus.each do |menu|
+        @current_items.push(menu.items.partition{ |item| item.users.include? (current_user)}.flatten)
+      end
+    end
     if params[:meal] and params[:location]
       session[:selected_meal] = params[:meal]
       session[:selected_location] = params[:location]
@@ -30,7 +35,11 @@ class MenusController < ApplicationController
     @menu = Menu.where(id: params[:id]).first
     @selected_meal = @menu.meal
     @selected_location = @menu.location
-    @items = @menu.items.sort_by{ |obj| obj.updated_at }
+    if current_user
+      @items = @menu.items.sort_by{ |obj| obj.updated_at }.partition{ |item| item.users.include? (current_user)}.flatten
+    else
+      @items = @menu.items.sort_by{ |obj| obj.updated_at }
+    end
   end
 
   private
