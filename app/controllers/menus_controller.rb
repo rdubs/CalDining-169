@@ -13,10 +13,8 @@ class MenusController < ApplicationController
     params[:location] ? @selected_location = params[:location] : @selected_location = session[:selected_location]
     @current_items = []
     if current_user
-      current_user.items.each do |item|
-        if item.menus.length > 0
-          @current_items.push(item)
-        end
+      @menus.each do |menu|
+        @current_items.push(menu.items.partition{ |item| item.users.include? (current_user)}.flatten)
       end
     end
     if params[:meal] and params[:location]
