@@ -30,7 +30,11 @@ class MenusController < ApplicationController
     @menu = Menu.where(id: params[:id]).first
     @selected_meal = @menu.meal
     @selected_location = @menu.location
-    @items = @menu.items.sort_by{ |obj| obj.updated_at }
+    if current_user
+      @items = @menu.items.sort_by{ |obj| obj.updated_at }.partition{ |item| item.users.include? (current_user)}.flatten
+    else
+      @items = @menu.items.sort_by{ |obj| obj.updated_at }
+    end
   end
 
   private

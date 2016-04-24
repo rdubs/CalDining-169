@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, only: [:upload_picture]
+  before_filter :authenticate_user!, only: [:upload_picture, :add_to_preferences, :remove_from_preferences]
 
   # GET /items/1
   # GET /items/1.json
@@ -20,25 +20,27 @@ class ItemsController < ApplicationController
   end
   
   def add_to_preferences
-    user = User.where(:id => params[:user_id]).first
-    item = Item.where(:id => params[:item_id]).first
+    user = current_user
+    item = Item.where(:id => params[:id]).first
     if not user.items.include? (item)
       user.items << item
       user.save!
       user.reload
       item.reload
     end
+    redirect_to :back
   end
   
   def remove_from_preferences
-    user = User.where(:id => params[:user_id]).first
-    item = Item.where(:id => params[:item_id]).first
+    user = current_user
+    item = Item.where(:id => params[:id]).first
     if user.items.include? (item)
       user.items.delete(item)
       user.save!
       user.reload
       item.reload
     end
+    redirect_to :back
   end
   
   private
