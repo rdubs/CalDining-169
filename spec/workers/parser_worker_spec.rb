@@ -871,5 +871,6 @@ RSpec.describe ParserWorker, type: :worker do
     expect(Item.where(name: "Brown Rice").first.sodium).to eq("1.5mg")
     expect(Item.where(name: "Brown Rice").first.allergens).to eq("")
     expect(Item.where(name: "Brown Rice").first.ingredients).to eq("Brown Rice, Water")
+    expect(Item.where(name: "Brown Rice").first.vegan).to be true
   end
 end
