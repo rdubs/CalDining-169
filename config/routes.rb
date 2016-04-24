@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get '/pending' => 'admin#pending'
   get '/disapproved' => 'admin#disapproved'
   get '/adminuser' => 'admin#adminuser'
+  post '/items/:id/add_to_preferences' => 'items#add_to_preferences', as: 'add_to_preferences'
+  post '/items/:id/remove_from_preferences' => 'items#remove_from_preferences', as: 'remove_from_preferences'
   put '/admin/:id' => 'admin#update', as: 'update'
   root 'menus#index'
   # The priority is based upon order of creation: first created -> highest priority.
