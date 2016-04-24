@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook, :google_oauth2]
   has_many :images
+  has_and_belongs_to_many :items, :join_table => :items_users
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(:email => data["email"]).first
