@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424054702) do
+ActiveRecord::Schema.define(version: 20160424082509) do
 
   create_table "images", force: :cascade do |t|
     t.string   "filename"
@@ -27,9 +27,8 @@ ActiveRecord::Schema.define(version: 20160424054702) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
-    t.integer  "preferences_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
     t.boolean  "nutrition_available"
     t.string   "calories"
     t.string   "calories_from_fat"
@@ -53,9 +52,9 @@ ActiveRecord::Schema.define(version: 20160424054702) do
     t.string   "iron_percent"
     t.string   "allergens"
     t.string   "ingredients"
+    t.boolean  "vegetarian",                  default: false
+    t.boolean  "vegan",                       default: false
   end
-
-  add_index "items", ["preferences_id"], name: "index_items_on_preferences_id"
 
   create_table "items_menus", id: false, force: :cascade do |t|
     t.integer "item_id"
@@ -75,14 +74,6 @@ ActiveRecord::Schema.define(version: 20160424054702) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "preferences", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "user_id"
-  end
-
-  add_index "preferences", ["user_id"], name: "index_preferences_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                             null: false
