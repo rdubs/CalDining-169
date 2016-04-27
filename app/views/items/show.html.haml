@@ -6,10 +6,10 @@
       .preference-buttons
         - if user_signed_in?
           - if !current_user.items.include? (@item)
-            = link_to add_to_preferences_path(@item.id), :method => :post, :class => 'add' do
+            = link_to add_to_preferences_path(@item.id), :method => :post, :class => 'add', :id => @item.name + "item" do
               %i.fa.fa-heart-o{"aria-hidden" => "true"}
           - else
-            = link_to remove_from_preferences_path(@item.id), :method => :post, :class => 'remove' do
+            = link_to remove_from_preferences_path(@item.id), :method => :post, :class => 'remove', :id => @item.name + "item" do
               %i.fa.fa-heart{"aria-hidden" => "true"}
     .upload-container.right
       - if user_signed_in?

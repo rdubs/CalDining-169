@@ -28,6 +28,6 @@
           .list-content
             = item.name
           .list-button
-            = button_to 'Remove', remove_from_preferences_path(item.id), {:method => :post, :class => 'list-btn'}
+            = button_to 'Remove', remove_from_preferences_path(item.id), {:method => :post, :class => 'list-btn', :id => item.name + "item"}
         .list-hr
       

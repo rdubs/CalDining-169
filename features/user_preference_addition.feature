@@ -6,7 +6,8 @@ Feature: User should be able to add food items to their preferences
 
 Background: On the CalDining-169 home page
 
-  Given I am on the home page
+  Given I am signed in as admin
+  And I am on the home page
 
 Scenario: Adding an item to preferences from menu
   When I choose "Dinner"

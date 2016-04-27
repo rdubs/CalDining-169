@@ -6,14 +6,15 @@ Feature: Users should be able to manage which food items they prefer
 
 Background: Add Pizza to my preferences
 
-  Given I am on the home page
+  Given I am signed in as admin
+  And I am on the home page
   And I choose "Lunch"
   And I choose "Crossroads"
   And I press "Submit"
   Then I add "Pizza" to my preferences
 
 Scenario: Removing preferences from my account page
-  Given I am on on my account page
+  Given I am on my account page
   And I remove "Pizza" from my preferences
   Then I should not see "Pizza" in my preference list
   

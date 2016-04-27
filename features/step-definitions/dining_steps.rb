@@ -172,7 +172,7 @@ Then (/^I make "([^"]*)" admin a regular user$/) do |user|
 end
 
 Then(/^I add "([^"]*)" to my preferences$/) do |arg1|
-  find('.add').click
+  page.find('#' + arg1 + 'item').click
 end
 
 Then(/^I should see "([^"]*)" in my preference list$/) do |arg1|
@@ -180,7 +180,7 @@ Then(/^I should see "([^"]*)" in my preference list$/) do |arg1|
 end
 
 When(/^I remove "([^"]*)" from my preferences$/) do |arg1|
-  find('.remove').click
+  page.find('#' + arg1 + 'item').click
 end
 
 Then(/^I should not see "([^"]*)" in my preference list$/) do |arg1|
@@ -188,11 +188,13 @@ Then(/^I should not see "([^"]*)" in my preference list$/) do |arg1|
 end
 
 Then(/^I should see "([^"]*)" in my preference box$/) do |arg1|
-  click_link('Preferences')
+  visit '/menus'
+  find('.preference-subheader').click
   page.should have_content(arg1)
 end
 
 Then(/^I should not see "([^"]*)" in my preference box$/) do |arg1|
-  click_link('Preferences')
+  visit '/menus'
+  find('.preference-subheader').click
   page.should_not have_content(arg1)
 end
