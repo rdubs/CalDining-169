@@ -17,6 +17,8 @@ module NavigationHelpers
         '/menus'
       end
       "/menus/#{menu.id}"
+    when /^my account page$/
+      '/users/edit'
     else
       begin
         page_name =~ /^the (.*) page$/
