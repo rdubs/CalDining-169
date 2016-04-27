@@ -2,6 +2,7 @@ class ErrorsController < ApplicationController
     
     def show
         status_code = params[:code] || 500
+        @code = status_code
         @error_body = "Please double-check the address you typed in."
         case status_code
         when "404"
