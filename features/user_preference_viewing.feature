@@ -15,7 +15,7 @@ Background: Add Pizza to my preferences
 
 Scenario: Viewing available preferred items on the home page
   Given I am on the home page
-  Then I should see "Milk" in my preference box
+  Then I should see "Pizza" in my preference box
   
 Scenario: Viewing preferences on my account page
   Given I am on my account page
