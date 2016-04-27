@@ -14,7 +14,7 @@ class MenusController < ApplicationController
     @current_items = []
     if current_user
       @menus.each do |menu|
-        @current_items.push(menu.items.partition{ |item| item.users.include? (current_user)}.flatten)
+        @current_items.push(menu.items.select{ |item| item.users.include? (current_user)}.flatten)
       end
     end
     if params[:meal] and params[:location]

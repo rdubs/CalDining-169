@@ -6,7 +6,8 @@ Feature: Users should be able to view their preferred food items when they are a
   
 Background: Add Pizza to my preferences
 
-  Given I am on the home page
+  Given I am signed in as admin
+  And I am on the home page
   And I choose "Lunch"
   And I choose "Crossroads"
   And I press "Submit"
@@ -17,6 +18,6 @@ Scenario: Viewing available preferred items on the home page
   Then I should see "Pizza" in my preference box
   
 Scenario: Viewing preferences on my account page
-  Given I am on on my account page
+  Given I am on my account page
   Then I should see "Pizza" in my preference list
   

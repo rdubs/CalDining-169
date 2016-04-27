@@ -1,7 +1,7 @@
 .container
-  .container.login-container
+  .container.align
     .header
-      Edit #{resource_name.to_s.humanize}
+      Change Password
     = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
       = devise_error_messages!
       .field
@@ -10,20 +10,24 @@
         %div
           Currently waiting confirmation for: #{resource.unconfirmed_email}
       .field
+        = f.password_field :current_password, autocomplete: "off", placeholder: 'Current Password', class: 'login-input'
+      .field
         = f.password_field :password, autocomplete: "off", placeholder: 'New Password', class: 'login-input'
       .field
         = f.password_field :password_confirmation, autocomplete: "off", placeholder: 'New Password Confirmation', class: 'login-input'
-      .field
-        = f.password_field :current_password, autocomplete: "off", placeholder: 'Current Password', class: 'login-input'
       .actions
         %div
           = f.submit "Update", class: 'login-action'
         %div
           = button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete,  class: 'login-action', id: 'cancel'
-    .header
-      Preferences
-    - current_user.items.each do |item|
-      %div
-        = item.name
-        = link_to 'Remove', remove_from_preferences_path(item.id), :method => :post
+
+    .section.md-width
+      .header Preferences
+      - current_user.items.each do |item|
+        .list-item.clear
+          .list-content
+            = item.name
+          .list-button
+            = button_to 'Remove', remove_from_preferences_path(item.id), {:method => :post, :class => 'list-btn', :id => item.name + "item"}
+        .list-hr
       

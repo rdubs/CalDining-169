@@ -1,78 +1,85 @@
 .container
-  .header #{@item.name}
+  .header
+    #{@item.name}
   .container.clear
-    .availability.left
-      Available for #{@meal} at #{@location}
+    .item-options.left
+      .preference-buttons
+        - if user_signed_in?
+          - if !current_user.items.include? (@item)
+            = link_to add_to_preferences_path(@item.id), :method => :post, :class => 'add', :id => @item.name + "item" do
+              %i.fa.fa-heart-o{"aria-hidden" => "true"}
+          - else
+            = link_to remove_from_preferences_path(@item.id), :method => :post, :class => 'remove', :id => @item.name + "item" do
+              %i.fa.fa-heart{"aria-hidden" => "true"}
     .upload-container.right
       - if user_signed_in?
         #upload-button.clear
           .upload-text.left
             %i.fa.fa-camera{"aria-hidden" => "true"}
             Add an image
+  .container
+    .availability
+      Available for #{@meal} at #{@location}
+
 .container
-  - if user_signed_in?
-    - if !current_user.items.include? (@item)
-      = link_to 'Add', add_to_preferences_path(@item.id), :method => :post
-    - else
-      = link_to 'Remove', remove_from_preferences_path(@item.id), :method => :post
-- if not @images.empty?
-  .items-container.clear
-    - @images.each do |image|
-      .item-container.item-content-container
-        - if user_signed_in? && current_user.admin?
-          .item-icons-container.clear
-            = link_to image_disapprove_path(image.id), :method => :post do
-              .status-container.disapprove-container#full
-                Remove
-                %i.fa.fa-times{"aria-hidden" => "true"}
-        .item-image-container
-          = image_tag image.filename, class: 'img_scaled_wh'
-.container
-  .nutrition-container
-    - if @item.nutrition_available
-      .nutrition-facts-container
-        .subheader Nutrition Facts
-        .container.clear
-          .half
-            %ul
-              %li
-                Calories:
-                %span #{@item.calories}
-              %li
-                Total Fat:
-                %span #{@item.total_fat}
-              %li
-                Cholesterol:
-                %span #{@item.cholesterol}
-              %li
-                Sodium:
-                %span #{@item.sodium}
-          .half
-            %ul
-              %li
-                Dietary Fiber:
-                %span #{@item.dietary_fiber}
-              - if not @item.vitamin_c_percent.nil?
+  - if not @images.empty?
+    .items-container.clear
+      - @images.each do |image|
+        .item-container.item-content-container
+          - if user_signed_in? && current_user.admin?
+            .item-icons-container.clear
+              = link_to image_disapprove_path(image.id), :method => :post do
+                .status-container.disapprove-container#full
+                  Remove
+                  %i.fa.fa-times{"aria-hidden" => "true"}
+          .item-image-container
+            = image_tag image.filename, class: 'img_scaled_wh'
+  .container
+    .nutrition-container
+      - if @item.nutrition_available
+        .nutrition-facts-container
+          .subheader Nutrition Facts
+          .container.clear
+            .half
+              %ul
                 %li
-                  Vitamin C:
-                  %span #{@item.vitamin_c_percent + '%'}
-              %li
-                Allergens:
-                %span #{@item.allergens}
-        %hr
-      .ingredients-container
-        .subheader#ingredients-button Ingredients
-        .ingredients-text.hidden #{@item.ingredients}
-    - else
-      .subheader No nutrition information available
-    %hr
-    - if not @other_locations.empty?
-      .other-location-container.clear
-        .subtitle.pretext.left Also available for #{@meal} at
-        .other-location-item-container.left.clear
-          - @other_locations.each do |location|
-            .other-location-item.left
-              = link_to location.location, menu_path(location.id)
+                  Calories:
+                  %span #{@item.calories}
+                %li
+                  Total Fat:
+                  %span #{@item.total_fat}
+                %li
+                  Cholesterol:
+                  %span #{@item.cholesterol}
+                %li
+                  Sodium:
+                  %span #{@item.sodium}
+            .half
+              %ul
+                %li
+                  Dietary Fiber:
+                  %span #{@item.dietary_fiber}
+                - if not @item.vitamin_c_percent.nil?
+                  %li
+                    Vitamin C:
+                    %span #{@item.vitamin_c_percent + '%'}
+                %li
+                  Allergens:
+                  %span #{@item.allergens}
+          %hr
+        .ingredients-container
+          .subheader#ingredients-button Ingredients
+          .ingredients-text.hidden #{@item.ingredients}
+      - else
+        .subheader No nutrition information available
+      %hr
+      - if not @other_locations.empty?
+        .other-location-container.clear
+          .subtitle.pretext.left Also available for #{@meal} at
+          .other-location-item-container.left.clear
+            - @other_locations.each do |location|
+              .other-location-item.left
+                = link_to location.location, menu_path(location.id)
 
 = javascript_tag do
   var filepicker_key = "#{ENV['FILEPICKER_KEY']}";

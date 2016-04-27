@@ -8,13 +8,16 @@
 	- else
 		- @items.each do |item|
 			.item-container
-				- if user_signed_in?
-					- if !current_user.items.include? (item)
-						= button_to 'Add', add_to_preferences_path(item.id), :method => :post
-					- else
-						= button_to 'Remove', remove_from_preferences_path(item.id), :method => :post
-				%a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
-					.item-content-container
+				.item-content-container
+					.preference-buttons-container.clear
+						- if user_signed_in?
+							- if !current_user.items.include? (item)
+								= link_to add_to_preferences_path(item.id), :method => :post, :class => 'add right', :id => item.name + "item" do
+									%i.fa.fa-heart-o{"aria-hidden" => "true"}
+							- else
+								= link_to remove_from_preferences_path(item.id), :method => :post, :class => 'remove right',  :id => item.name + "item" do
+									%i.fa.fa-heart{"aria-hidden" => "true"}
+					%a{:href => item_path({:id => item.id, :location => @menu.location, :meal => @menu.meal})}
 						- if Image.get_first_image(item)
 							.item-image-container
 								%img{:src => Image.get_first_image(item), :class => 'img_scaled_wh'}

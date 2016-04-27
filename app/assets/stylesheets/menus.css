@@ -28,6 +28,7 @@
     background: #fff;
     border: 1px solid rgba(0,0,0,.09);
     padding: 10px;
+    padding-top: 5px;
 }
 
 .item-container {
@@ -149,4 +150,35 @@ input:focus {
 .no-image-caption {
     margin-top: 5px;
     font-weight: 600; 
+}
+
+.add, .remove {
+    font-size: 24px;
+    color: rgba(0,0,0,0.3);
+}
+
+.preference-container {
+    width: 25%;
+    float: left;
+    margin-top: 10px;
+    display: none;
+}
+
+.preference-title {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.preference-meal {
+    font-size: 14px;
+    color: rgba(0,0,0,0.44);
+}
+
+.preference-items {
+    font-size: 16px;
+    padding-right: 10px;
+}
+
+.preference-content {
+    margin-bottom: 10px;
 }

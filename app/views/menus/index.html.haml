@@ -2,11 +2,63 @@
   .header Select a meal and location
   = render 'shared/selection'
   - if user_signed_in?
-    - (0..11).each do |id|
-      %div
-        = 'Your favorites at ' + @menus[id].location + ' for ' + @menus[id].meal + ' are: '
-        - @current_items[id].each_with_index do |item, index|
-          - if index != (@current_items[id].length - 1)
-            = item.name + ', '
-          - else
-            = item.name
+    .section
+      .subheader.preference-subheader
+        Today's Preferences
+        %i.fa.fa-angle-down#down{"aria-hidden" => "true"}
+      .preference-container
+        .preference-title
+          = @menus[0].location
+        - (0..2).each do |id|
+          - if not @current_items[id].empty?
+            .preference-content
+              .preference-meal
+                = @menus[id].meal
+              .preference-items
+                - @current_items[id].each_with_index do |item, index|
+                  - if index != (@current_items[id].length - 1)
+                    = item.name + ', '
+                  - else
+                    = item.name
+      .preference-container
+        .preference-title
+          = @menus[3].location
+        - (3..5).each do |id|
+          - if not @current_items[id].empty?
+            .preference-content
+              .preference-meal
+                = @menus[id].meal
+              .preference-items
+                - @current_items[id].each_with_index do |item, index|
+                  - if index != (@current_items[id].length - 1)
+                    = item.name + ', '
+                  - else
+                    = item.name
+      .preference-container
+        .preference-title
+          = @menus[6].location
+        - (6..8).each do |id|
+          - if not @current_items[id].empty?
+            .preference-content
+              .preference-meal
+                = @menus[id].meal
+              .preference-items
+                - @current_items[id].each_with_index do |item, index|
+                  - if index != (@current_items[id].length - 1)
+                    = item.name + ', '
+                  - else
+                    = item.name
+      .preference-container
+        .preference-title
+          = @menus[9].location
+        - (9..11).each do |id|
+          - if not @current_items[id].empty?
+            .preference-content
+              .preference-meal
+                = @menus[id].meal
+              .preference-items
+                - @current_items[id].each_with_index do |item, index|
+                  - if index != (@current_items[id].length - 1)
+                    = item.name + ', '
+                  - else
+                    = item.name
