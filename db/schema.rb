@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160424082509) do
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
+    t.integer  "preferences_id"
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
     t.boolean  "nutrition_available"
@@ -56,6 +57,8 @@ ActiveRecord::Schema.define(version: 20160424082509) do
     t.boolean  "vegan",                       default: false
   end
 
+  add_index "items", ["preferences_id"], name: "index_items_on_preferences_id"
+
   create_table "items_menus", id: false, force: :cascade do |t|
     t.integer "item_id"
     t.integer "menu_id"
@@ -74,6 +77,14 @@ ActiveRecord::Schema.define(version: 20160424082509) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "preferences", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+  end
+
+  add_index "preferences", ["user_id"], name: "index_preferences_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                             null: false
