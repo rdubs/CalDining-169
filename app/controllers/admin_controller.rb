@@ -29,7 +29,7 @@ class AdminController < ApplicationController
         def redirect_non_admin
             if not current_user or not current_user.admin?
                 #flash[:notice] = 'MADAFAK'
-                redirect_to root_path
+                redirect_to "/403"
             end
         end
 end
