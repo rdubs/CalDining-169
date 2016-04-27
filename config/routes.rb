@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   post '/items/:id/remove_from_preferences' => 'items#remove_from_preferences', as: 'remove_from_preferences'
   put '/admin/:id' => 'admin#update', as: 'update'
   root 'menus#index'
-  %w( 404 422 500 503).each do |code|
-    get code, :to => 'menus#index', :code => code
+  %w( 403 404 422 500 503).each do |code|
+    get code, :to => 'errors#show', :code => code
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

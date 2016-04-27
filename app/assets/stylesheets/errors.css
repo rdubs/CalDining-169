@@ -1,0 +1,24 @@
+.sorry_msg {
+    font-size: 48px;
+    font-weight: 800;
+    color: rgba(0,0,0,.8);
+    letter-spacing: -.022em;
+    text-align: center;
+}
+
+.error_body {
+    font-size: 36px;
+    font-weight: 600;
+    color: rgba(0,0,0,.8);
+    letter-spacing: -.022em;
+    text-align: center;
+}
+
+.error_container{
+    font-size: 20px;
+    font-weight: 200;
+    color: rgba(0,0,0,.3);
+    text-align: center;
+    margin: auto;
+    width: 40%;
+}
