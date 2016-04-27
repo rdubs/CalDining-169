@@ -1,14 +1,14 @@
-.admin-email {
+.list-content {
     float: left;
     line-height: 35px;
 }
 
-.admin-item {
+.list-item {
     font-size: 16px;
     padding: 4px;
 }
 
-.admin-button {
+.list-button {
     float: right;
 }
 
@@ -17,7 +17,7 @@
     height: 30px;
 }
 
-.admin-btn {
+.list-btn {
     background-color: #fff;
     display:inline-block;
     border: 1px solid rgba(0,0,0,.09);
@@ -29,11 +29,11 @@
     cursor: pointer;
 }
 
-.admin-btn:hover{
+.list-btn:hover{
     color: rgba(0,0,0,0.8);
 }
 
-.admin-hr {
+.list-hr {
     margin-top: 8px;
     margin-bottom: 8px;
     max-width: 960px;
@@ -41,8 +41,8 @@
     border-top: 1px solid rgba(0,0,0,.0785);
 }
 
-.regular-section {
-    margin-top: 30px;
+.section {
+    margin-top: 56px;
 }
 
 .approve-container {

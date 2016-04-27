@@ -1,18 +1,19 @@
 .container
-	.subheader Admin Users
-	- @admin.each do |admin|
-		.admin-item.clear
-			.admin-email
-				= admin.email
-			.admin-button 
-				= button_to 'Make regular user', update_path(admin.id), {:method => :put, :class => 'admin-btn'}
-		.admin-hr
-	.regular-section
+	.section
+		.subheader Admin Users
+		- @admin.each do |admin|
+			.list-item.clear
+				.list-content
+					= admin.email
+				.list-button 
+					= button_to 'Make regular user', update_path(admin.id), {:method => :put, :class => 'list-btn'}
+			.list-hr
+	.section
 		.subheader Regular Users
 		- @nonadmin.each do |nonadmin|
-			.admin-item.clear
-				.admin-email
+			.list-item.clear
+				.list-content
 					= nonadmin.email
-				.admin-button 
-					= button_to 'Make admin', update_path(nonadmin.id), {:method => :put, :class => 'admin-btn'}
-			.admin-hr
+				.list-button
+					= button_to 'Make admin', update_path(nonadmin.id), {:method => :put, :class => 'list-btn'}
+			.list-hr

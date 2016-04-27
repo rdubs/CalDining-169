@@ -136,6 +136,10 @@ a:hover {
     margin: 10px 0;
 }
 
+.align {
+    text-align: center;
+}
+
 #error_explanation li {
     color: rgba(0,0,0,.6);
     line-height: 1.4;
@@ -143,6 +147,11 @@ a:hover {
 
 .fa-camera {
     margin-right: 4px;
+}
+
+.md-width {
+    max-width: 600px;
+    margin: 56px auto;
 }
 
 .fa-cutlery {

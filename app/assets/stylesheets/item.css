@@ -82,9 +82,13 @@
 
 .availability {
     font-size: 18px;
-    line-height: 45px;
     color: #02b875;
     font-weight: 500;
+}
+
+.preference-buttons {
+    font-size: 18px;
+    line-height: 46px;
 }
 
 .other-location-container {
