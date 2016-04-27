@@ -1,11 +1,12 @@
 .container.clear
   .header Select a meal and location
   = render 'shared/selection'
-  - (0..11).each do |id|
-    %div
-      = 'Your favorites at ' + @menus[id].location + ' for ' + @menus[id].meal + ' are: '
-      - @current_items[id].each_with_index do |item, index|
-        - if index != (@current_items[id].length - 1)
-          = item.name + ', '
-        - else
-          = item.name
+  - if user_signed_in?
+    - (0..11).each do |id|
+      %div
+        = 'Your favorites at ' + @menus[id].location + ' for ' + @menus[id].meal + ' are: '
+        - @current_items[id].each_with_index do |item, index|
+          - if index != (@current_items[id].length - 1)
+            = item.name + ', '
+          - else
+            = item.name
