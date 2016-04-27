@@ -6,13 +6,14 @@
   - else
     - @disapproved_images.each do |image|
       .item-container
-        .item-icons-container.clear
-          = link_to image_approve_path(image.id), :method => :post  do
-            .status-container.approve-container#full
-              Approve
-              %i.fa.fa-check{"aria-hidden" => "true"}
-        .item-image-container
-          = image_tag image.filename, {:class => 'img_scaled_wh'}
-        .item-text-container
-          .item-text
-            = image.item.name
+        .item-content-container
+          .item-icons-container.clear
+            = link_to image_approve_path(image.id), :method => :post  do
+              .status-container.approve-container#full
+                Approve
+                %i.fa.fa-check{"aria-hidden" => "true"}
+          .item-image-container
+            = image_tag image.filename, {:class => 'img_scaled_wh'}
+          .item-text-container
+            .item-text
+              = image.item.name
