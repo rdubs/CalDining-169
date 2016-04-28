@@ -5,6 +5,8 @@ script:
   - bundle exec rake db:migrate
   - bundle exec rake db:seed RAILS_ENV=test --trace
   - bundle exec rake
+after_script:
+  - bundle exec rake send_to_codeclimate
 addons:
     code_climate:
         repo_token: 689dbe563c598bcae24304d19d65c575435bc1607d244bf0febc507ff6a811f1
