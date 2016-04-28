@@ -1,0 +1,9 @@
+.sorry_msg Sorry!
+.error_body 
+    = @error_message
+.error_container
+    = 'Error ' + @code
+.error_container 
+    = @error_body
+.error_container In the meantime we'll try to redirect you back to the menu page.
+%meta{"HTTP-EQUIV" => "REFRESH", :content => "6; url=menus"}/

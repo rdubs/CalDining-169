@@ -19,6 +19,10 @@ module NavigationHelpers
       "/menus/#{menu.id}"
     when /^my account page$/
       '/users/edit'
+    when /^a forbidden page$/
+      '/403'
+    when /^a non-existent page$/
+      '/404'
     else
       begin
         page_name =~ /^the (.*) page$/
