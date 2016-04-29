@@ -33,7 +33,7 @@
 
 .item-container {
     width: calc(25% - 10px);
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     box-sizing: border-box;
     float: left;
     position: relative;
@@ -50,7 +50,8 @@ hr {
 
 .item-text-container {
     margin-top: 10px;
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.4;
     font-weight: 600;
 }
 
