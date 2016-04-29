@@ -10,6 +10,12 @@
 			.item-container
 				.item-content-container
 					.preference-buttons-container.clear
+						- if item.vegan
+							%div
+							= image_tag "vegan.png"
+						- if item.vegetarian
+							%div
+							= image_tag "vegetarian.png"
 						- if user_signed_in?
 							- if !current_user.items.include? (item)
 								= link_to add_to_preferences_path(item.id), :method => :post, :class => 'add right', :id => item.name + "item" do
