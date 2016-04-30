@@ -1,8 +1,10 @@
 .container
   .header Disapproved Images
 .items-container.clear
-  - if @disapproved_images.empty? 
-    %div No disapproved images available.
+  - if @disapproved_images.empty?
+    #error_explanation
+      %h2
+        = "No disapproved images available."
   - else
     - @disapproved_images.each do |image|
       .item-container

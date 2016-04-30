@@ -4,7 +4,10 @@
 
 .items-container.clear
 	- if @items.empty?
-		= 'Closed'
+		#error_explanation
+			%h2
+				%i.fa.fa-exclamation-circle{"aria-hidden" => "true"}
+				= @menu.location + " is closed for " + @menu.meal.downcase + "."
 	- else
 		- @items.each do |item|
 			.item-container

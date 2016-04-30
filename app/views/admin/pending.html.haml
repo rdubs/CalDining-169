@@ -1,23 +1,25 @@
 .container
   .header Pending Images
 .items-container.clear
-  - if @pending_images.empty? 
-    .notice No pending images. You're all caught up! 
+  - if @pending_images.empty?
+    #error_explanation
+      %h2
+        = "No pending images. You're all caught up! "
   - else
-  - @pending_images.each do |image|
-    .item-container
-      .item-content-container
-        .item-icons-container.clear
-          = link_to image_approve_path(image.id), :method => :post  do
-            .status-container.approve-container.left
-              Approve
-              %i.fa.fa-check{"aria-hidden" => "true"}
-          = link_to image_disapprove_path(image.id), :method => :post do
-            .status-container.disapprove-container.right
-              Disapprove
-              %i.fa.fa-times{"aria-hidden" => "true"} 
-        .item-image-container
-          = image_tag image.filename, {:class => 'img_scaled_wh'}
-        .item-text-container
-          .item-text
-            = image.item.name
+    - @pending_images.each do |image|
+      .item-container
+        .item-content-container
+          .item-icons-container.clear
+            = link_to image_approve_path(image.id), :method => :post  do
+              .status-container.approve-container.left
+                Approve
+                %i.fa.fa-check{"aria-hidden" => "true"}
+            = link_to image_disapprove_path(image.id), :method => :post do
+              .status-container.disapprove-container.right
+                Disapprove
+                %i.fa.fa-times{"aria-hidden" => "true"} 
+          .item-image-container
+            = image_tag image.filename, {:class => 'img_scaled_wh'}
+          .item-text-container
+            .item-text
+              = image.item.name

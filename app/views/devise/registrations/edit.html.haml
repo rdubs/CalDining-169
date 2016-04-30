@@ -23,11 +23,24 @@
 
     .section.md-width
       .header Preferences
-      - current_user.items.each do |item|
-        .list-item.clear
-          .list-content
-            = item.name
-          .list-button
-            = button_to 'Remove', remove_from_preferences_path(item.id), {:method => :post, :class => 'list-btn', :id => item.name + "item"}
-        .list-hr
+      - if current_user.items.empty?
+        #error_explanation
+          %h2
+            %i.fa.fa-exclamation-circle{"aria-hidden" => "true"}
+            = "You have selected any preferences"
+          %div
+            %span
+              = "Click on an item's"
+            %span 
+              %i.fa.fa-heart-o{"aria-hidden" => "true"}
+            %span
+              = " icon to add it to your preferences"
+      - else
+        - current_user.items.each do |item|
+          .list-item.clear
+            .list-content
+              = item.name
+            .list-button
+              = button_to 'Remove', remove_from_preferences_path(item.id), {:method => :post, :class => 'list-btn', :id => item.name + "item"}
+          .list-hr
       
